@@ -1,1 +1,1 @@
-# DataVizProject
+# GPU_Visualizations
