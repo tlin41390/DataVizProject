@@ -7,7 +7,7 @@ function main() {
         .attr("width", canvasWidth)
         .attr("height", canvasHeight)
 
-    d3.csv("../../CSV/gpu_counts.csv").then((data) => {
+    d3.csv("CSV/gpu_counts.csv").then((data) => {
 
         model_set = new Set();
 
