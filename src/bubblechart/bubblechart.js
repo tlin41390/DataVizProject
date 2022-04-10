@@ -1,6 +1,6 @@
 function main() {
-    const canvasWidth = 700;
-    const canvasHeight = 700;
+    const canvasWidth = 800;
+    const canvasHeight = 800;
 
     const svg = d3.select("#bubble_chart")
         .append("svg")
@@ -29,6 +29,8 @@ function main() {
             .style("border-width", "2px")
             .style("border-radius", "5px")
             .style("font-family", "sans-serif")
+            .style("width", "200px")
+            .style("transform","translate(-100px,0px)")
             .style("padding", "5px")
 
         // Three function that change the tooltip when user hover / move / leave a cell
