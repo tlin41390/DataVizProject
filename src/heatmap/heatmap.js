@@ -16,7 +16,7 @@ function main() {
     const container_g = svg.append("g")
         .attr("transform", "translate(200,100)");
 
-    d3.csv("../../CSV/condensed_ebay_prices.csv", (d) => { return { time: d["Month"], mode: d["GPUs"], bought: +d["Sold"] } }).then(data => {
+    d3.csv("CSV/condensed_ebay_prices.csv", (d) => { return { time: d["Month"], mode: d["GPUs"], bought: +d["Sold"] } }).then(data => {
         const myGroups = Array.from(new Set(data.map(d => d.mode)))
         const myRows = Array.from(new Set(data.map(d => d.time)))
         console.log(myGroups);
