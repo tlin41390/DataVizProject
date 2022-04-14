@@ -11,13 +11,58 @@ function main() {
 
     const width = svg.attr("width") - margin;
     const height = svg.attr("height") - margin;
-    
+
     const parseTime = d3.timeParse("%y-%b")
 
     const container_g = svg.append("g")
-        .attr("transform","translate(100,100)");
+        .attr("transform", "translate(100,100)");
 
-    d3.csv("../../CSV/condensed_ebay_prices_etherium .csv", function (d) {
+    d3.csv("../../CSV/linechartData/thirty_sixty.csv", function (d) {
+        return d;
+    }).then(function (data) {
+        for (d of data) {
+            d.date = parseTime(d.Month);
+            d.prices = +d.Prices;
+            console.log(d.date);
+        }
+
+
+        const xScale_thirty_sixty = d3.scaleTime()
+            .domain(d3.extent(data, (d) => { return d.date }))
+            .range([0, width/2]);
+
+        const yScale_thirty_sixty = d3.scaleLinear()
+            .domain([300, 800])
+            .range(([height/2, 0]));
+
+        const sumstat = d3.group(data, d => d.GPUs)
+        
+        container_g.append("g")
+            .attr("transform", "translate(0," + height/2 + ")")
+            .attr("font-size","1px")
+            .call(d3.axisBottom(xScale_thirty_sixty).tickFormat(function(d){
+                return  d3.timeFormat("%b" )(d);
+            }))
+
+        container_g.append("g")
+            .call(d3.axisLeft(yScale_thirty_sixty))
+        //color scale for the different plays that are being represented.
+        const color = d3.scaleOrdinal()
+            .range(['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#1e90ff', 'seagreen', 'aquamarine', 'yellow', 'blue', 'pink', 'coral', 'cyan'])
+
+        container_g.selectAll(".line")
+            .data(sumstat)
+            .join("path")
+            .attr("fill", "none")
+            .attr("stroke", (d) => { return color(d[0]) })
+            .attr("stroke-width", 1.5)
+            .attr("d", function (d) {
+                return d3.line()
+                    .x(d => xScale_thirty_sixty(d.date))
+                    .y(d => yScale_thirty_sixty(d.prices))(d[1])
+            })
+    });
+    d3.csv("../../CSV/linechartData/thirty_seventy_ti.csv", function (d) {
         return d;
     }).then(function (data) {
 
@@ -26,62 +71,42 @@ function main() {
             d.prices = +d.Prices;
         }
 
-        const xScale = d3.scaleTime()
+
+        const xScale_thirty_seventy_ti = d3.scaleTime()
             .domain(d3.extent(data, (d) => { return d.date }))
-            .range([0, width]);
+            .range([width/2+50, height]);
 
-        const yScale = d3.scaleLinear()
-            .domain([0, d3.max(data, d => Number(d.Prices.replace(/[^0-9.-]+/g, "")))])
-            .range(([height, 0]));
+        const yScale_thirty_seventy_ti = d3.scaleLinear()
+            .domain([500, 1400])
+            .range(([height/2, 0]));
 
-        const sumstat = d3.group(data, d => d.Item)
-        container_g.append("g")
-            .attr("transform","translate(0,"+ height + ")")
-            .call(d3.axisBottom(xScale))
-            .append("text")
-            .attr("y", height - 350)
-            .attr("x",width - 250)
-            .attr("font-size","30px")
-            .attr("stroke","black")
-            .text("Months")
+        const sumstat = d3.group(data, d => d.GPUs)
 
         container_g.append("g")
-            .call(d3.axisLeft(yScale))
-            .append("text")
-            .attr("font-size","25px")
-            .attr("transform","rotate(-90)")
-            .attr("y",40)
-            .attr("x",-80)
-            .attr("dy","-4.1em")
-            .attr("stroke","black")
-            .text("Prices for Items")
+            .attr("transform", "translate(0," + height/2 + ")")
+            .call(d3.axisBottom(xScale_thirty_seventy_ti).tickFormat(function(d){
+                return  d3.timeFormat("%b")(d);
+            }))
 
-             //color scale for the different plays that are being represented.
+        container_g.append("g")
+            .attr("transform","translate("+(width/2+50)+",0)")
+            .call(d3.axisLeft(yScale_thirty_seventy_ti))
+
+        //color scale for the different plays that are being represented.
         const color = d3.scaleOrdinal()
-            .range(['#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00','#1e90ff','seagreen','aquamarine','yellow','blue','pink','coral','cyan'])
+            .range(['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#1e90ff', 'seagreen', 'aquamarine', 'yellow', 'blue', 'pink', 'coral', 'cyan'])
 
-         container_g.selectAll(".line")
+        container_g.selectAll(".line")
             .data(sumstat)
             .join("path")
-            .attr("fill","none")
-            .attr("stroke",(d)=>{ return color(d[0])})
-            .attr("stroke-width",1.5)
-            .attr("d",function(d){
+            .attr("fill", "none")
+            .attr("stroke", (d) => { return color(d[0]) })
+            .attr("stroke-width", 1.5)
+            .attr("d", function (d) {
                 return d3.line()
-                    .x(d => xScale(d.date))
-                    .y(d => yScale(d.prices))(d[1])
-                })
-
-        container_g.selectAll(".label")
-                .data(sumstat)
-                .enter()
-                .append("text")
-                .datum(function(d){ return{id:d.date,value:d.prices}})
-                .attr("class","label")
-                .attr("transform", function(d){ return "translate(" + xScale(d.value.date)+ ","+ yScale(d.value.prices)+ ")";})
-                .attr("x", 55)
-                .attr("y",15)
-
+                    .x(d => xScale_thirty_seventy_ti(d.date))
+                    .y(d => yScale_thirty_seventy_ti(d.prices))(d[1])
+            })
     });
 }
 main();
