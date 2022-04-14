@@ -11,75 +11,99 @@ function main() {
     const width = svg.attr("width") - margin;
     const height = svg.attr("height") - margin;
 
-    const xScale = d3.scaleLinear().range([0, width / 2]);
-    const yScale = d3.scaleLinear().range([height / 2, 0]);
+    const xScale_thirtySeventyTi = d3.scaleLinear().range([0, width / 2]);
+    const yScale_thirtySeventyTi = d3.scaleLinear().range([height / 2, 0]);
 
-    const x = d3.scaleLinear().range([width / 2 + 30, width])
-    const y = d3.scaleLinear().range([height / 2, 0])
+    const xScale_thirtyEightyTi = d3.scaleLinear().range([width / 2 + 30, height])
+    const yScale_thirtyEightyTi = d3.scaleLinear().range([height / 2, 0])
 
-    const thirdX = d3.scaleLinear().range([0, width / 2])
-    const thirdY = d3.scaleLinear().range([width, height / 2 + 30])
+    const xScale_thirtyNinety = d3.scaleLinear().range([0, width / 2])
+    const yScale_thirtyNinety = d3.scaleLinear().range([width, height / 2 + 30])
+
+    const xScale_thirtySixty = d3.scaleLinear().range([width / 2 + 30, height])
+    const yScale_thirtySixty = d3.scaleLinear().range([width, height / 2 + 30])
 
     const container_g = svg.append("g")
         .attr("transform", "translate(100,100)");
 
-    d3.csv("../../CSV/stock_and_time-(Nvidia).csv").then(data => {
-        xScale.domain([0, 60]);
-        yScale.domain([0, 400]);
-        x.domain([0, 60]);
-        y.domain([0, 400]);
-        thirdX.domain([0, 60]);
-        thirdY.domain([0, 400]);
+    d3.csv("../../CSV/stock_and_time-Nvidia.csv").then(data => {
+        xScale_thirtySeventyTi.domain([0, 60]);
+        yScale_thirtySeventyTi.domain([0, 400]);
 
-        let distributions_thirtyseventy = []
-        let distributions_thirtyeighty = []
+        xScale_thirtyEightyTi.domain([0, 60]);
+        yScale_thirtyEightyTi.domain([0, 400]);
+
+        xScale_thirtyNinety.domain([0, 60]);
+        yScale_thirtyNinety.domain([0, 400]);
+
+        xScale_thirtySixty.domain([0, 60]);
+        yScale_thirtySixty.domain([0, 400]);
+
+        let distributions_thirtysixty = []
+        let distributions_thirtyeighty_ti = []
         let distributions_thirtyseventy_ti = []
+        let distributions_thirtyninety = []
+
         data.forEach((d) => {
-            if (d.chipset == "rtx-3070") {
-                distributions_thirtyseventy.push(d["time(minutes)"])
-            } else if (d.chipset == "rtx-3080") {
-                distributions_thirtyeighty.push(d["time(minutes)"])
+            if (d.chipset == "rtx-3070ti") {
+                distributions_thirtyseventy_ti.push(d["time"])
             } else if (d.chipset == "rtx-3080ti") {
-                distributions_thirtyseventy_ti.push(d["time(minutes)"])
+                distributions_thirtyeighty_ti.push(d["time"])
+            } else if (d.chipset == "rtx-3090") {
+                distributions_thirtyninety.push(d["time"])
+            } else if (d.chipset == "rtx-3060") {
+                distributions_thirtysixty.push(d["time"])
             }
         })
+
         container_g.append("g")
             .attr("transform", "translate(0, " + height / 2 + ")")
-            .call(d3.axisBottom(x))
+            .call(d3.axisBottom(xScale_thirtySeventyTi))
 
+        container_g.append("g")
+            .attr("transform", "translate(0, " + height / 2 + ")")
+            .call(d3.axisBottom(xScale_thirtyEightyTi))
 
         container_g.append("g")
             .attr("transform", "translate(0, " + height + ")")
-            .call(d3.axisBottom(thirdX))
+            .call(d3.axisBottom(xScale_thirtyNinety))
 
         container_g.append("g")
-            .call(d3.axisLeft(thirdY).tickFormat(function (d) {
+            .attr("transform","translate(0, "+ height +")")
+            .call(d3.axisBottom(xScale_thirtySixty))
+
+        container_g.append("g")
+            .call(d3.axisLeft(yScale_thirtySeventyTi).tickFormat(function (d) {
                 return d;
             }).ticks())
 
         container_g.append("g")
-            .attr("transform", "translate(0, " + height / 2 + ")")
-            .call(d3.axisBottom(xScale))
-
-        container_g.append("g")
-            .call(d3.axisLeft(yScale).tickFormat(function (d) {
-                return d;
-            }).ticks())
-
-        container_g.append("g")
-            .call(d3.axisLeft(y).tickFormat(function (d) {
+            .call(d3.axisLeft(yScale_thirtyEightyTi).tickFormat(function (d) {
                 return d;
             }).ticks())
             .attr("transform", "translate(" + ((width / 2) + 30) + "," + 0 + ")")
 
+        container_g.append("g")
+            .call(d3.axisLeft(yScale_thirtyNinety).tickFormat(function (d) {
+                return d;
+            }).ticks())
+
+        container_g.append("g")
+            .call(d3.axisLeft(yScale_thirtySixty).tickFormat(function (d){
+                 return d;}).ticks())
+                .attr("transform","translate(" + ((width/2)+30) + "," + 0 + ")")
+
+
         const computeBins = d3.bin()
             .value(function (d) { return d })
-            .domain(xScale.domain())
-            .thresholds(xScale.ticks(10));
+            .domain(xScale_thirtySeventyTi.domain())
+            .thresholds(xScale_thirtySeventyTi.ticks(10));
 
-        const getOther = computeBins(distributions_thirtyeighty);
-        const bins = computeBins(distributions_thirtyseventy);
-        const getThird = computeBins(distributions_thirtyseventy_ti);
+
+        const compute_thirtyeighty_ti = computeBins(distributions_thirtyeighty_ti);
+        const compute_thirtyninety = computeBins(distributions_thirtyninety);
+        const compute_thirtyseventy_ti = computeBins(distributions_thirtyseventy_ti);
+        const compute_thirtysixty = computeBins(distributions_thirtysixty);
 
         const tooltip = d3.select("body")
             .append("div")
@@ -109,16 +133,16 @@ function main() {
         }
 
         container_g.selectAll(".bar1")
-            .data(getThird)
+            .data(compute_thirtyeighty_ti)
             .enter()
             .append("rect")
-            .attr("class", "bar")
-            .attr("x", function (d) { return xScale(d.x0) })
-            .attr("y", function (d) { return yScale(d.length) })
-            .attr("width", function (d) { return xScale(d.x1) - xScale(d.x0) })
+            .attr("class", "bar1")
+            .attr("x", function (d) { return xScale_thirtyEightyTi(d.x0) })
+            .attr("y", function (d) { return yScale_thirtyEightyTi(d.length) })
+            .attr("width", function (d) { return xScale_thirtyEightyTi(d.x1) - xScale_thirtyEightyTi(d.x0) })
             .style("fill", "green")
             .style("opacity", 0.5)
-            .attr("height", function (d) { return height / 2 - yScale(d.length); })
+            .attr("height", function (d) { return height / 2 - yScale_thirtyEightyTi(d.length); })
             .on("mouseover", mouseover)
             .on("mousemove", (Event, d) => {
                 tooltip
@@ -128,17 +152,20 @@ function main() {
             })
             .on("mouseleave", mouseleave)
 
+        console.log(distributions_thirtyseventy_ti);
+        console.log(distributions_thirtysixty);
+
         container_g.selectAll(".bar2")
-            .data(getOther)
+            .data(compute_thirtyninety)
             .enter()
             .append("rect")
             .attr("class", "bar2")
-            .attr("x", function (d) { return x(d.x0) })
-            .attr("y", function (d) { return y(d.length) })
-            .attr("width", function (d) { return x(d.x1) - x(d.x0) })
+            .attr("x", function (d) { return xScale_thirtyNinety(d.x0) })
+            .attr("y", function (d) { return yScale_thirtyNinety(d.length) })
+            .attr("width", function (d) { return xScale_thirtyNinety(d.x1) - xScale_thirtyNinety(d.x0) })
             .style("fill", "green")
             .style("opacity", 0.5)
-            .attr("height", function (d) { return height / 2 - y(d.length); })
+            .attr("height", function (d) { return height - yScale_thirtyNinety(d.length) })
             .on("mouseover", mouseover)
             .on("mousemove", (Event, d) => {
                 tooltip
@@ -149,16 +176,36 @@ function main() {
             .on("mouseleave", mouseleave)
 
         container_g.selectAll(".bar3")
-            .data(bins)
+            .data(compute_thirtyseventy_ti)
             .enter()
             .append("rect")
             .attr("class", "bar3")
-            .attr("x", function (d) { return thirdX(d.x0) })
-            .attr("y", function (d) { return thirdY(d.length) })
-            .attr("width", function (d) { return thirdX(d.x1) - thirdX(d.x0) })
+            .attr("x", function (d) { return xScale_thirtySeventyTi(d.x0) })
+            .attr("y", function (d) { return yScale_thirtySeventyTi(d.length) })
+            .attr("width", function (d) { return xScale_thirtySeventyTi(d.x1) - xScale_thirtySeventyTi(d.x0) })
             .style("fill", "green")
             .style("opacity", 0.5)
-            .attr("height", function (d) { return height - thirdY(d.length); })
+            .attr("height", function (d) { return height / 2 - yScale_thirtySeventyTi(d.length); })
+            .on("mouseover", mouseover)
+            .on("mousemove", (Event, d) => {
+                tooltip
+                    .html("Frequency " + d.length)
+                    .style("left", (Event.x) / 2 - 100 + "px")
+                    .style("top", (Event.y) / 2 + "px")
+            })
+            .on("mouseleave", mouseleave)
+
+        container_g.selectAll(".bar4")
+            .data(compute_thirtysixty)
+            .enter()
+            .append("rect")
+            .attr("class", "bar4")
+            .attr("x", function (d) { return xScale_thirtySixty(d.x0) })
+            .attr("y", function (d) { return yScale_thirtySixty(d.length) })
+            .attr("width", function (d) { return xScale_thirtySixty(d.x1) - xScale_thirtySixty(d.x0) })
+            .style("fill", "green")
+            .style("opacity", 0.5)
+            .attr("height", function (d) { return height  - yScale_thirtySixty(d.length); })
             .on("mouseover", mouseover)
             .on("mousemove", (Event, d) => {
                 tooltip

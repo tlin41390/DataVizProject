@@ -5,7 +5,7 @@ function main() {
     const margin = 400;
 
 
-    const svg = d3.select("body").append("svg")
+    const svg = d3.select("#linechart").append("svg")
         .attr("width", canvasWidth)
         .attr("height", canvasHeight)
 
