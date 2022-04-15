@@ -18,10 +18,10 @@ function main() {
     const yScale_thirtyEightyTi = d3.scaleLinear().range([height / 2, 0])
 
     const xScale_thirtyNinety = d3.scaleLinear().range([0, width / 2])
-    const yScale_thirtyNinety = d3.scaleLinear().range([width, height / 2 + 30])
+    const yScale_thirtyNinety = d3.scaleLinear().range([height, height / 2 + 30])
 
     const xScale_thirtySixty = d3.scaleLinear().range([width / 2 + 30, height])
-    const yScale_thirtySixty = d3.scaleLinear().range([width, height / 2 + 30])
+    const yScale_thirtySixty = d3.scaleLinear().range([height, height / 2 + 30])
 
     const container_g = svg.append("g")
         .attr("transform", "translate(100,100)");
