@@ -69,7 +69,7 @@ function main() {
             .call(d3.axisBottom(xScale_thirtyNinety))
 
         container_g.append("g")
-            .attr("transform","translate(0, "+ height +")")
+            .attr("transform", "translate(0, " + height + ")")
             .call(d3.axisBottom(xScale_thirtySixty))
 
         container_g.append("g")
@@ -89,9 +89,10 @@ function main() {
             }).ticks())
 
         container_g.append("g")
-            .call(d3.axisLeft(yScale_thirtySixty).tickFormat(function (d){
-                 return d;}).ticks())
-                .attr("transform","translate(" + ((width/2)+30) + "," + 0 + ")")
+            .call(d3.axisLeft(yScale_thirtySixty).tickFormat(function (d) {
+                return d;
+            }).ticks())
+            .attr("transform", "translate(" + ((width / 2) + 30) + "," + 0 + ")")
 
 
         const computeBins = d3.bin()
@@ -205,7 +206,7 @@ function main() {
             .attr("width", function (d) { return xScale_thirtySixty(d.x1) - xScale_thirtySixty(d.x0) })
             .style("fill", "green")
             .style("opacity", 0.5)
-            .attr("height", function (d) { return height  - yScale_thirtySixty(d.length); })
+            .attr("height", function (d) { return height - yScale_thirtySixty(d.length); })
             .on("mouseover", mouseover)
             .on("mousemove", (Event, d) => {
                 tooltip

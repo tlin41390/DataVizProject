@@ -46,7 +46,7 @@ function main() {
 
         container_g.append("g")
             .attr("transform", "translate(-30," + 0 + ")")
-            .call(d3.axisLeft(yScale_thirty_sixty))
+            .call(d3.axisLeft(yScale_thirty_sixty)) 
         //color scale for the different plays that are being represented.
         const color = d3.scaleOrdinal()
             .range(['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#1e90ff', 'seagreen', 'aquamarine', 'yellow', 'blue', 'pink', 'coral', 'cyan'])
