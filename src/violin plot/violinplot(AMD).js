@@ -14,7 +14,7 @@ function main() {
             "translate(" + margin.left + "," + margin.top + ")");
 
     // Read the data and compute summary statistics for each specie
-    d3.csv("../../CSV/stock_and_time-Nvidia.csv", function (data) {
+    d3.csv("../../CSV/stock_and_time-AMD.csv", function (data) {
 
         // Build and Show the Y scale
         var y = d3.scaleLinear()
@@ -73,7 +73,7 @@ function main() {
             .append("path")
             .datum(function (d) { return (d.value) })     // So now we are working bin per bin
             .style("stroke", "none")
-            .style("fill", "#69b3a2")
+            .style("fill","#F8971D")
             .attr("d", d3.area()
                 .x0(function (d) { return (xNum(-d.length)) })
                 .x1(function (d) { return (xNum(d.length)) })
