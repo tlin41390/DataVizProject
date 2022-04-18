@@ -26,7 +26,7 @@ function main() {
     const container_g = svg.append("g")
         .attr("transform", "translate(100,100)");
 
-    d3.csv("../../CSV/stock_and_time-Nvidia.csv").then(data => {
+    d3.csv("CSV/stock_and_time-Nvidia.csv").then(data => {
         xScale_thirtySeventyTi.domain([0, 60]);
         yScale_thirtySeventyTi.domain([0, 400]);
 
