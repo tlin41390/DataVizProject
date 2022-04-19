@@ -43,14 +43,6 @@ function main() {
                     return "orange"
                 }else if (d.GPUs == "GeForce RTX 3070 Ti"){
                     return "purple"
-                }else if (d.GPUs == "Radeon RX 6600 XT"){
-                    return "red"
-                }else if (d.GPUs == "Radeon RX 6700 XT"){
-                    return "blue"
-                }else if(d.GPUs == "Radeon RX 6800 XT"){
-                    return "brown"
-                }else{
-                    return "gold"
                 }
             })
             .attr("class", "dot")

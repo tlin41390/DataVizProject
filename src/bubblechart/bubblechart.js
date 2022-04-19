@@ -1,6 +1,6 @@
 function main() {
-    const canvasWidth = 800;
-    const canvasHeight = 800;
+    const canvasWidth = 600;
+    const canvasHeight = 600;
 
     const svg = d3.select("#bubble_chart")
         .append("svg")
@@ -48,7 +48,7 @@ function main() {
             Tooltip
                 .html(d.GPUs + "<br>" + d.Sold + " Units Sold")
                 .style("left", event.x+ 10 + "px")
-                .style("top", event.y+ (1000) +"px")
+                .style("top", event.y+ (500) +"px")
         }
         var mouseleave = function () {
             Tooltip

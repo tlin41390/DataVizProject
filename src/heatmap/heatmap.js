@@ -1,6 +1,6 @@
 function main() {
-    const canvasWidth = 800;
-    const canvasHeight = 800;
+    const canvasWidth = 700;
+    const canvasHeight = 700;
     const margin = 200;
 
     const svg = d3.select("#heat_map").append("svg")

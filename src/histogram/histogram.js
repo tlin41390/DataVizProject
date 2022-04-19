@@ -107,7 +107,7 @@ function main() {
         const compute_thirtysixty = computeBins(distributions_thirtysixty);
 
         // create a tooltip
-        const Tooltip = d3.select("#heat_map")
+        const Tooltip = d3.select("#histogram")
             .append("div")
             .style("opacity", 0)
             .attr("class", "tooltip")
@@ -153,7 +153,7 @@ function main() {
                 Tooltip
                     .html("Frequency " + d.length)
                     .style("left", event.x + 30 + "px")
-                    .style("top", event.y + (1700) + "px")
+                    .style("top", event.y + (1000) + "px")
             })
             .on("mouseleave", mouseleave)
 
@@ -176,7 +176,7 @@ function main() {
                 Tooltip
                     .html("Frequency " + d.length)
                     .style("left", event.x + 10 + "px")
-                    .style("top", event.y + (1700) + "px")
+                    .style("top", event.y + (1000) + "px")
             })
             .on("mouseleave", mouseleave)
 
@@ -196,7 +196,7 @@ function main() {
                 Tooltip
                     .html("Frequency " + d.length)
                     .style("left", event.x + 10 + "px")
-                    .style("top", event.y + (1700) + "px")
+                    .style("top", event.y + (1000) + "px")
             })
             .on("mouseleave", mouseleave)
 
@@ -216,7 +216,7 @@ function main() {
                 Tooltip
                     .html("Frequency " + d.length)
                     .style("left", event.x + 10 + "px")
-                    .style("top", event.y + (1700) + "px")
+                    .style("top", event.y + (1000) + "px")
             })
             .on("mouseleave", mouseleave)
     })
