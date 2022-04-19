@@ -3,7 +3,7 @@ function main() {
     const canvasHeight = 700;
     const margin = 200;
 
-    const svg = d3.select("#histogam(AMD)").append("svg")
+    const svg = d3.select("#histogramAMD").append("svg")
         .attr("width", canvasWidth)
         .attr("height", canvasHeight)
 

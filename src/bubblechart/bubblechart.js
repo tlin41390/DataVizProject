@@ -30,7 +30,6 @@ function main() {
             .style("border-radius", "5px")
             .style("font-family", "sans-serif")
             .style("width", "200px")
-            .style("transform","translate(-100px,0px)")
             .style("padding", "5px")
 
         // Three function that change the tooltip when user hover / move / leave a cell
@@ -48,8 +47,8 @@ function main() {
         const mousemove = function (event, d) {
             Tooltip
                 .html(d.GPUs + "<br>" + d.Sold + " Units Sold")
-                .style("left", (event.x / 2) + "px")
-                .style("top", (event.y / 2) + "px")
+                .style("left", event.x+ 10 + "px")
+                .style("top", event.y+ (1000) +"px")
         }
         var mouseleave = function () {
             Tooltip

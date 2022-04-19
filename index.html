@@ -6,71 +6,96 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>The Current State Of the Graphics Processing Unit Market</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://d3js.org/d3.v7.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js" integrity="sha384-l+HksIGR+lyuyBo1+1zCBSRt6v4yklWu7RbG0Cv+jDLDD9WFcEIwZLHioVB4Wkau" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"
+    integrity="sha384-l+HksIGR+lyuyBo1+1zCBSRt6v4yklWu7RbG0Cv+jDLDD9WFcEIwZLHioVB4Wkau" crossorigin="anonymous"
+    referrerpolicy="no-referrer"></script>
 </head>
 
 <body>
   <section class="hero is-primary is-bold">
     <div class="hero-body">
       <div class="container">
-        <h1 class="title">The Current State Of The Graphics Processing Unit Market</h1> 
+        <h1 class="title">The Current State Of The Graphics Processing Unit Market</h1>
         <h2 class="subtitle">
         </h2>
       </div>
     </div>
   </section>
-	
-<section class = "section">
-    <div class  = "container">
-      <h1  class  = "title">About</h1>
-	    <p>For a while now Graphics Processing Units also known as (GPUs) have been the goal for PC builders to acqure.
-		However, in the current climate it is practically impossible to purchase a GPU at MSRP or even find one in stock.
-		For those that are in the market, the prices are ramped up heaviliy to the point where it is no longer justifiable to purchase it.
-		This project will explore the fluxuating prices of GPUs, as well as visualize how short the time is for GPUs being in stock. I will compare
-		the price of Etherum to the changing prices of GPUs as well as represent how many of each GPU have been bought in a monthly basis. With this project
-		I hope to find how much the GPU market has increased or decreased in prices. the  trend in gpu prices relative to changes in cryptocurrency prices,
-		as well as the general times until GPUs go out of stock.</p>
-    </section>
 
-  <section class = "section">
-    <div class  = "container">
-      <h1  class  = "title">Alpha Release Document</h1>
-        <a href =  "Alpha_Release.pdf"> AlphaRelease</a>
-    </section>
-	  
- <section class = "section">
-    <div class  = "container">
-      <h1  class  = "title">Basic Visualizations</h1>
-	<ul>
-		<li><a href =  "src/heatmap/index.html"> HeatMap</a></li>
-	</br>
-	        <li><a href = "src/violin plot/index.html">ViolinPlot</a></li>
-	</br>
-	 	<li><a href = "src/line chart/index.html">LineChart</a></li>
-	 
-	</ul>
-    </section>
-	 <section class = "section">
-    <div class  = "container">
-      <h1  class  = "title">Basic Visualizations</h1>
-	<div id="bubble_chart" style="width: 100px; float:left; height:100px; margin:10px; transform: translate(-200px,-50px)"></div>
-    	<script src="src/bubblechart/bubblechart.js"></script>
-  <div id = "heat_map" style="width: 100px; float:left; height:100px; margin:10px; transform: translate(400px,-50px)"></div>
-      <script src = "src/heatmap/heatmap.js"></script>
-    </section>
-<br>
+  <section class="section">
+    <div class="container">
+      <h1 class="title">About</h1>
+      <p>For a while now Graphics Processing Units also known as (GPUs) have been the goal for PC builders to acqure.
+        However, in the current climate it is practically impossible to purchase a GPU at MSRP or even find one in
+        stock.
+        For those that are in the market, the prices are ramped up heaviliy to the point where it is no longer
+        justifiable to purchase it.
+        This project will explore the fluxuating prices of GPUs, as well as visualize how short the time is for GPUs
+        being in stock. I will compare
+        the price of Etherum to the changing prices of GPUs as well as represent how many of each GPU have been bought
+        in a monthly basis. With this project
+        I hope to find how much the GPU market has increased or decreased in prices. the trend in gpu prices relative to
+        changes in cryptocurrency prices,
+        as well as the general times until GPUs go out of stock.</p>
+  </section>
 
-		 
-		 
-</section>
-	 <section class = "section">
-    <div class  = "container">
-      <h1  class  = "title">Basic Visualizations</h1>
-	<div id="histogram" style="width: 100px; float:left; height:100px; margin:10px; transform: translate(-200px,-50px)"></div>
-    	<script src="src/histogram/histogram.js"></script>
-  <div id = "histogram(AMD)" style="width: 100px; float:left; height:100px; margin:10px; transform: translate(400px,-50px)"></div>
-      <script src = "src/histogram/histogram(AMD).js"></script>
-    </section>
+  <section class="section">
+    <div class="container">
+      <h1 class="title">Alpha Release Document</h1>
+      <a href="Alpha_Release.pdf"> AlphaRelease</a>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h1 class="title">Basic Visualizations</h1>
+      <ul>
+        <li><a href="src/heatmap/index.html"> HeatMap</a></li>
+        </br>
+        <li><a href="src/violin plot/index.html">ViolinPlot</a></li>
+        </br>
+        <li><a href="src/line chart/index.html">LineChart</a></li>
+
+      </ul>
+  </section>
+  <section class="section">
+    <h1 class="title">Basic Visualizations</h1>
+    <div class="flex">
+      <div id="bubble_chart"></div>
+      <div id="heat_map"></div>
+      <script src="src/bubblechart/bubblechart.js"></script>
+      <script src="src/heatmap/heatmap.js"></script>
+    </div>
+  </section>
+
+  </section>
+  <section class="section">
+    <h1 class="title">Distributions of GPU sellout times within the hour</h1>
+    <div class="flex">
+      <div id="histogram"></div>
+      <script src="src/histogram/histogram.js"></script>
+      <div id="histogramAMD"></div>
+      <script src="src/histogram/histogram(AMD).js"></script>
+  </section>
+
+  </section>
+  <section class="section">
+    <h1 class="title">Violin Plot of AMD and NVidia sell out times</h1>
+    <div class="flex">
+      <div id="Nvidia-Violinplot"></div>
+      <script src="src/violin plot/violinplot.js"></script>
+      <div id = "AMD-Violinplot"></div>
+      <script src = "src/violin plot/violinplot(AMD).js"></script>
+  </section>
+
+  </section>
+  <section class="section">
+    <h1 class="title">GPU market prices over time compared to MSRP</h1>
+    <div class="flex">
+      <div id="linechart"></div>
+      <script src="src/line chart/linechart.js"></script>
+  </section>
 </body>
+
 </html>

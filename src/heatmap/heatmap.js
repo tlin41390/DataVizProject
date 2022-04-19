@@ -33,7 +33,7 @@ function main() {
             .style("border-width", "2px")
             .style("border-radius", "5px")
             .style("font-family", "sans-serif")
-            .style("transform","translate(0px,0px)")
+            .style("transform", "translate(0px,0px)")
             .style("width", "200px")
             .style("padding", "5px")
 
@@ -48,8 +48,8 @@ function main() {
         const mousemove = function (event, d) {
             Tooltip
                 .html(d.mode + "<br>" + d.bought + " Units Sold")
-                .style("left", (event.x / 2) + "px")
-                .style("top", (event.y / 2) + "px")
+                .style("left", event.x + 10 + "px")
+                .style("top", event.y + (1000) + "px")
         }
         var mouseleave = function () {
             Tooltip
@@ -94,9 +94,9 @@ function main() {
             .attr("width", x.bandwidth())
             .attr("height", y.bandwidth())
             .style("fill", (d) => { return myColor(d.bought) })
-            .on("mouseover",mouseover)
-            .on("mousemove",mousemove)
-            .on("mouseout",mouseleave)
+            .on("mouseover", mouseover)
+            .on("mousemove", mousemove)
+            .on("mouseout", mouseleave)
 
     })
 

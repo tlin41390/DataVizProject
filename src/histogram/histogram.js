@@ -106,19 +106,23 @@ function main() {
         const compute_thirtyseventy_ti = computeBins(distributions_thirtyseventy_ti);
         const compute_thirtysixty = computeBins(distributions_thirtysixty);
 
-        const tooltip = d3.select("body")
+        // create a tooltip
+        const Tooltip = d3.select("#heat_map")
             .append("div")
             .style("opacity", 0)
             .attr("class", "tooltip")
+            .style("position", "absolute")
             .style("background-color", "white")
             .style("border", "solid")
-            .style("width", "10%")
-            .style("border-width", 50)
-            .style("border-radius", 5)
+            .style("border-width", "2px")
+            .style("border-radius", "5px")
+            .style("font-family", "sans-serif")
+            .style("transform", "translate(0px,0px)")
+            .style("width", "200px")
             .style("padding", "5px")
 
         let mouseover = function (d) {
-            tooltip
+            Tooltip
                 .style("opacity", 1)
             d3.select(this)
                 .style("stroke", "black")
@@ -126,7 +130,7 @@ function main() {
         }
 
         let mouseleave = function (d) {
-            tooltip
+            Tooltip
                 .style("opacity", 0)
             d3.select(this)
                 .style("stroke", "none")
@@ -145,11 +149,11 @@ function main() {
             .style("opacity", 0.5)
             .attr("height", function (d) { return height / 2 - yScale_thirtyEightyTi(d.length); })
             .on("mouseover", mouseover)
-            .on("mousemove", (Event, d) => {
-                tooltip
+            .on("mousemove", (event, d) => {
+                Tooltip
                     .html("Frequency " + d.length)
-                    .style("left", (Event.x) / 2 - 100 + "px")
-                    .style("top", (Event.y) / 2 + "px")
+                    .style("left", event.x + 30 + "px")
+                    .style("top", event.y + (1700) + "px")
             })
             .on("mouseleave", mouseleave)
 
@@ -168,11 +172,11 @@ function main() {
             .style("opacity", 0.5)
             .attr("height", function (d) { return height - yScale_thirtyNinety(d.length) })
             .on("mouseover", mouseover)
-            .on("mousemove", (Event, d) => {
-                tooltip
+            .on("mousemove", (event, d) => {
+                Tooltip
                     .html("Frequency " + d.length)
-                    .style("left", (Event.x) / 2 - 100 + "px")
-                    .style("top", (Event.y) / 2 + "px")
+                    .style("left", event.x + 10 + "px")
+                    .style("top", event.y + (1700) + "px")
             })
             .on("mouseleave", mouseleave)
 
@@ -188,11 +192,11 @@ function main() {
             .style("opacity", 0.5)
             .attr("height", function (d) { return height / 2 - yScale_thirtySeventyTi(d.length); })
             .on("mouseover", mouseover)
-            .on("mousemove", (Event, d) => {
-                tooltip
+            .on("mousemove", (event, d) => {
+                Tooltip
                     .html("Frequency " + d.length)
-                    .style("left", (Event.x) / 2 - 100 + "px")
-                    .style("top", (Event.y) / 2 + "px")
+                    .style("left", event.x + 10 + "px")
+                    .style("top", event.y + (1700) + "px")
             })
             .on("mouseleave", mouseleave)
 
@@ -208,11 +212,11 @@ function main() {
             .style("opacity", 0.5)
             .attr("height", function (d) { return height - yScale_thirtySixty(d.length); })
             .on("mouseover", mouseover)
-            .on("mousemove", (Event, d) => {
-                tooltip
+            .on("mousemove", (event, d) => {
+                Tooltip
                     .html("Frequency " + d.length)
-                    .style("left", (Event.x) / 2 - 100 + "px")
-                    .style("top", (Event.y) / 2 + "px")
+                    .style("left", event.x + 10 + "px")
+                    .style("top", event.y + (1700) + "px")
             })
             .on("mouseleave", mouseleave)
     })

@@ -17,7 +17,7 @@ function main() {
     const container_g = svg.append("g")
         .attr("transform", "translate(100,100)");
 
-    d3.csv("CSV/linechartData/thirty_sixty.csv", function (d) {
+    d3.csv("../../CSV/linechartData/rx6600xt.csv", function (d) {
         return d;
     }).then(function (data) {
         for (d of data) {
@@ -32,7 +32,7 @@ function main() {
             .range([0, width / 2]);
 
         const yScale_thirty_sixty = d3.scaleLinear()
-            .domain([000, 3000])
+            .domain([0, 2000])
             .range(([height / 2, 0]));
 
         const sumstat = d3.group(data, d => d.GPUs)
@@ -46,10 +46,12 @@ function main() {
 
         container_g.append("g")
             .attr("transform", "translate(-30," + 0 + ")")
-            .call(d3.axisLeft(yScale_thirty_sixty)) 
+            .call(d3.axisLeft(yScale_thirty_sixty).tickFormat(function(d){
+                return d + "$";
+            }))
         //color scale for the different plays that are being represented.
         const color = d3.scaleOrdinal()
-            .range(['#e41a1c', '#377eb8'])
+            .range(['#F89713', 'black'])
 
         container_g.selectAll(".line")
             .data(sumstat)
@@ -64,7 +66,7 @@ function main() {
                     .y(d => yScale_thirty_sixty(d.prices))(d[1])
             })
     });
-    d3.csv("CSV/linechartData/thirty_seventy_ti.csv", function (d) {
+    d3.csv("../../CSV/linechartData/rx6700xt.csv", function (d) {
         return d;
     }).then(function (data) {
 
@@ -79,7 +81,7 @@ function main() {
             .range([width / 2 + 30, height]);
 
         const yScale_thirty_seventy_ti = d3.scaleLinear()
-            .domain([000, 3000])
+            .domain([0, 2000])
             .range(([height / 2, 0]));
 
         const sumstat = d3.group(data, d => d.GPUs)
@@ -92,11 +94,13 @@ function main() {
 
         container_g.append("g")
             .attr("transform", "translate(" + (width / 2 + 30) + ",0)")
-            .call(d3.axisLeft(yScale_thirty_seventy_ti))
+            .call(d3.axisLeft(yScale_thirty_seventy_ti).tickFormat(function(d){
+                return d + "$";
+            }))
 
         //color scale for the different plays that are being represented.
         const color = d3.scaleOrdinal()
-            .range(['#e41a1c', '#377eb8'])
+            .range(['#F89713', 'black'])
 
         container_g.selectAll(".line")
             .data(sumstat)
@@ -111,7 +115,7 @@ function main() {
             })
     });
 
-    d3.csv("CSV/linechartData/thirty_eighty_ti.csv", function (d) {
+    d3.csv("../../CSV/linechartData/rx6800xt.csv", function (d) {
         return d;
     }).then(function (data) {
 
@@ -126,8 +130,8 @@ function main() {
             .range([0, width / 2]);
 
         const yScale_thirty_eighty_ti = d3.scaleLinear()
-            .domain([000, 3000])
-            .range(([height/2,0]));
+            .domain([000, 2000])
+            .range(([height / 2, 0]));
 
         const sumstat = d3.group(data, d => d.GPUs)
 
@@ -138,17 +142,19 @@ function main() {
             }))
 
         container_g.append("g")
-            .attr("transform","translate(-30,"+(height/2+80)+")")
-            .call(d3.axisLeft(yScale_thirty_eighty_ti))
+            .attr("transform", "translate(-30," + (height / 2 + 80) + ")")
+            .call(d3.axisLeft(yScale_thirty_eighty_ti).tickFormat(function(d){
+                return d + "$";
+            }))
 
         //color scale for the different plays that are being represented.
         const color = d3.scaleOrdinal()
-            .range(['#e41a1c', '#377eb8'])
+            .range(['#F89713', 'black'])
 
         container_g.selectAll(".line")
             .data(sumstat)
             .join("path")
-            .attr("transform","translate(-30,"+(height/2+80)+")")
+            .attr("transform", "translate(-30," + (height / 2 + 80) + ")")
             .attr("fill", "none")
             .attr("stroke", (d) => { return color(d[0]) })
             .attr("stroke-width", 1.5)
@@ -159,7 +165,7 @@ function main() {
             })
     });
 
-    d3.csv("CSV/linechartData/thirty_ninety.csv", function (d) {
+    d3.csv("../../CSV/linechartData/rx6900.csv", function (d) {
         return d;
     }).then(function (data) {
 
@@ -171,11 +177,11 @@ function main() {
 
         const xScale_thirty_ninety = d3.scaleTime()
             .domain(d3.extent(data, (d) => { return d.date }))
-            .range([width/2+30, width]);
+            .range([width / 2 + 30, width]);
 
         const yScale_thirty_ninety = d3.scaleLinear()
-            .domain([0, 3000])
-            .range(([height/2,0]));
+            .domain([0, 2000])
+            .range(([height / 2, 0]));
 
         const sumstat = d3.group(data, d => d.GPUs)
 
@@ -186,20 +192,20 @@ function main() {
             }))
 
         container_g.append("g")
-            .attr("transform", "translate(" + (width/2+30) + "," + (height / 2 + 80) + ")")
+            .attr("transform", "translate(" + (width / 2 + 30) + "," + (height / 2 + 80) + ")")
             .call(d3.axisLeft(yScale_thirty_ninety).tickFormat(function(d){
                 return d + "$";
             }))
 
         //color scale for the different plays that are being represented.
         const color = d3.scaleOrdinal()
-            .range(['#e41a1c', '#377eb8'])
+            .range(['#F89713', 'black'])
 
         container_g.selectAll(".line")
             .data(sumstat)
             .join("path")
             .attr("fill", "none")
-            .attr("transform", "translate(0," + (height / 2+80) + ")")
+            .attr("transform", "translate(0," + (height / 2 + 80) + ")")
             .attr("stroke", (d) => { return color(d[0]) })
             .attr("stroke-width", 1.5)
             .attr("d", function (d) {
