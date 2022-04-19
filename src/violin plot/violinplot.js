@@ -14,7 +14,7 @@ function main() {
             "translate(" + margin.left + "," + margin.top + ")");
 
 
-    d3.csv("../../CSV/stock_and_time-Nvidia.csv").then(data => {
+    d3.csv("CSV/stock_and_time-Nvidia.csv").then(data => {
 
         var y = d3.scaleLinear()
             .domain([0, 60])
