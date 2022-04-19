@@ -5,7 +5,7 @@ function main() {
     const margin = 200;
 
 
-    const svg = d3.select("#linechart").append("svg")
+    const svg = d3.select("#linechart-Nvidia").append("svg")
         .attr("width", canvasWidth)
         .attr("height", canvasHeight)
 
@@ -46,10 +46,12 @@ function main() {
 
         container_g.append("g")
             .attr("transform", "translate(-30," + 0 + ")")
-            .call(d3.axisLeft(yScale_thirty_sixty)) 
+            .call(d3.axisLeft(yScale_thirty_sixty).tickFormat(function (d) {
+                return d + "$";
+            }))
         //color scale for the different plays that are being represented.
         const color = d3.scaleOrdinal()
-            .range(['#e41a1c', '#377eb8'])
+            .range(['#76b900', 'black'])
 
         container_g.selectAll(".line")
             .data(sumstat)
@@ -92,11 +94,13 @@ function main() {
 
         container_g.append("g")
             .attr("transform", "translate(" + (width / 2 + 30) + ",0)")
-            .call(d3.axisLeft(yScale_thirty_seventy_ti))
+            .call(d3.axisLeft(yScale_thirty_seventy_ti).tickFormat(function (d) {
+                return d + "$";
+            }))
 
         //color scale for the different plays that are being represented.
         const color = d3.scaleOrdinal()
-            .range(['#e41a1c', '#377eb8'])
+            .range(['#76b900', 'black'])
 
         container_g.selectAll(".line")
             .data(sumstat)
@@ -127,7 +131,7 @@ function main() {
 
         const yScale_thirty_eighty_ti = d3.scaleLinear()
             .domain([000, 3000])
-            .range(([height/2,0]));
+            .range(([height / 2, 0]));
 
         const sumstat = d3.group(data, d => d.GPUs)
 
@@ -138,17 +142,19 @@ function main() {
             }))
 
         container_g.append("g")
-            .attr("transform","translate(-30,"+(height/2+80)+")")
-            .call(d3.axisLeft(yScale_thirty_eighty_ti))
+            .attr("transform", "translate(-30," + (height / 2 + 80) + ")")
+            .call(d3.axisLeft(yScale_thirty_eighty_ti).tickFormat(function (d) {
+                return d + "$";
+            }))
 
         //color scale for the different plays that are being represented.
         const color = d3.scaleOrdinal()
-            .range(['#e41a1c', '#377eb8'])
+            .range(['#76b900', 'black'])
 
         container_g.selectAll(".line")
             .data(sumstat)
             .join("path")
-            .attr("transform","translate(-30,"+(height/2+80)+")")
+            .attr("transform", "translate(-30," + (height / 2 + 80) + ")")
             .attr("fill", "none")
             .attr("stroke", (d) => { return color(d[0]) })
             .attr("stroke-width", 1.5)
@@ -171,11 +177,11 @@ function main() {
 
         const xScale_thirty_ninety = d3.scaleTime()
             .domain(d3.extent(data, (d) => { return d.date }))
-            .range([width/2+30, width]);
+            .range([width / 2 + 30, width]);
 
         const yScale_thirty_ninety = d3.scaleLinear()
             .domain([0, 3000])
-            .range(([height/2,0]));
+            .range(([height / 2, 0]));
 
         const sumstat = d3.group(data, d => d.GPUs)
 
@@ -186,20 +192,20 @@ function main() {
             }))
 
         container_g.append("g")
-            .attr("transform", "translate(" + (width/2+30) + "," + (height / 2 + 80) + ")")
-            .call(d3.axisLeft(yScale_thirty_ninety).tickFormat(function(d){
+            .attr("transform", "translate(" + (width / 2 + 30) + "," + (height / 2 + 80) + ")")
+            .call(d3.axisLeft(yScale_thirty_ninety).tickFormat(function (d) {
                 return d + "$";
             }))
 
         //color scale for the different plays that are being represented.
         const color = d3.scaleOrdinal()
-            .range(['#e41a1c', '#377eb8'])
+            .range(['#76b900', 'black'])
 
         container_g.selectAll(".line")
             .data(sumstat)
             .join("path")
             .attr("fill", "none")
-            .attr("transform", "translate(0," + (height / 2+80) + ")")
+            .attr("transform", "translate(0," + (height / 2 + 80) + ")")
             .attr("stroke", (d) => { return color(d[0]) })
             .attr("stroke-width", 1.5)
             .attr("d", function (d) {

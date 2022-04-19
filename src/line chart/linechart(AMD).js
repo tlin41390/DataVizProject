@@ -5,7 +5,7 @@ function main() {
     const margin = 200;
 
 
-    const svg = d3.select("#linechart").append("svg")
+    const svg = d3.select("#linechart-AMD").append("svg")
         .attr("width", canvasWidth)
         .attr("height", canvasHeight)
 
@@ -17,7 +17,7 @@ function main() {
     const container_g = svg.append("g")
         .attr("transform", "translate(100,100)");
 
-    d3.csv("../../CSV/linechartData/rx6600xt.csv", function (d) {
+    d3.csv("CSV/linechartData/rx6600xt.csv", function (d) {
         return d;
     }).then(function (data) {
         for (d of data) {
@@ -66,7 +66,7 @@ function main() {
                     .y(d => yScale_thirty_sixty(d.prices))(d[1])
             })
     });
-    d3.csv("../../CSV/linechartData/rx6700xt.csv", function (d) {
+    d3.csv("CSV/linechartData/rx6700xt.csv", function (d) {
         return d;
     }).then(function (data) {
 
@@ -115,7 +115,7 @@ function main() {
             })
     });
 
-    d3.csv("../../CSV/linechartData/rx6800xt.csv", function (d) {
+    d3.csv("CSV/linechartData/rx6800xt.csv", function (d) {
         return d;
     }).then(function (data) {
 
@@ -165,7 +165,7 @@ function main() {
             })
     });
 
-    d3.csv("../../CSV/linechartData/rx6900.csv", function (d) {
+    d3.csv("CSV/linechartData/rx6900.csv", function (d) {
         return d;
     }).then(function (data) {
 
