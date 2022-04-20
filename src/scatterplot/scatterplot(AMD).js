@@ -25,7 +25,7 @@ function main() {
 
     const container_g = svg.append("g").attr("transform", "translate(100,100)")
 
-    d3.csv("../../CSV/ebay_prices(AMD).csv").then(data => {
+    d3.csv("CSV/ebay_prices(AMD).csv").then(data => {
         xScale.domain([2000, 4600]);
         yScale.domain([0, 2000]);
 
