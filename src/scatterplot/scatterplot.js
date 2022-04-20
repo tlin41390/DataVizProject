@@ -29,7 +29,7 @@ function main() {
         xScale.domain([2000, 4600]);
         yScale.domain([0, 3000]);
 
-        //append the circles on the graph and see what color scale to use based on the publisher
+        //append the circles on the graph and then see what color scale to use based on the publisher
         container_g.selectAll(".dot")
             .data(data)
             .enter().append("circle")
