@@ -10,85 +10,116 @@ function main() {
     const width = svg.attr("width") - margin;
     const height = svg.attr("height") - margin;
 
-    const xScale_thirtySeventyTi = d3.scaleLinear().range([0, width / 2]);
-    const yScale_thirtySeventyTi = d3.scaleLinear().range([height / 2, 0]);
+    const xScale_rx5700 = d3.scaleLinear().range([0, width / 2]);
+    const yScale_rx5700 = d3.scaleLinear().range([height / 2, 0]);
 
-    const xScale_thirtyEightyTi = d3.scaleLinear().range([width / 2 + 30, height])
-    const yScale_thirtyEightyTi = d3.scaleLinear().range([height / 2, 0])
+    const xScale_rx6700xt = d3.scaleLinear().range([width / 2 + 30, height])
+    const yScale_rx6700xt = d3.scaleLinear().range([height / 2, 0])
 
-    const xScale_thirtyNinety = d3.scaleLinear().range([0, width / 2])
-    const yScale_thirtyNinety = d3.scaleLinear().range([height, height / 2 + 30])
+    const xScale_rx6600xt = d3.scaleLinear().range([0, width / 2])
+    const yScale_rx6600xt = d3.scaleLinear().range([height, height / 2 + 30])
 
-    const xScale_thirtySixty = d3.scaleLinear().range([width / 2 + 30, height])
-    const yScale_thirtySixty = d3.scaleLinear().range([height, height / 2 + 30])
+    const xScale_rx6800xt = d3.scaleLinear().range([width / 2 + 30, height])
+    const yScale_rx6800xt = d3.scaleLinear().range([height, height / 2 + 30])
 
     const container_g = svg.append("g")
         .attr("transform", "translate(100,100)");
 
     d3.csv("CSV/stock_and_time-AMD.csv").then(data => {
-        xScale_thirtySeventyTi.domain([0, 60]);
-        yScale_thirtySeventyTi.domain([0, 400]);
+        xScale_rx5700.domain([0, 60]);
+        yScale_rx5700.domain([0, 400]);
 
-        xScale_thirtyEightyTi.domain([0, 60]);
-        yScale_thirtyEightyTi.domain([0, 400]);
+        xScale_rx6700xt.domain([0, 60]);
+        yScale_rx6700xt.domain([0, 400]);
 
-        xScale_thirtyNinety.domain([0, 60]);
-        yScale_thirtyNinety.domain([0, 400]);
+        xScale_rx6600xt.domain([0, 60]);
+        yScale_rx6600xt.domain([0, 400]);
 
-        xScale_thirtySixty.domain([0, 60]);
-        yScale_thirtySixty.domain([0, 400]);
+        xScale_rx6800xt.domain([0, 60]);
+        yScale_rx6800xt.domain([0, 400]);
 
-        let distributions_thirtysixty = []
-        let distributions_thirtyeighty_ti = []
-        let distributions_thirtyseventy_ti = []
-        let distributions_thirtyninety = []
+        let distributions_rx6800xt = []
+        let distributions_rx6700 = []
+        let distributions_rx5700 = []
+        let distributions_rx6600xt = []
 
         data.forEach((d) => {
             if (d.chipset == "rx5700") {
-                distributions_thirtyseventy_ti.push(d["time"])
+                distributions_rx5700.push(d["time"])
             } else if (d.chipset == "rx6700xt") {
-                distributions_thirtyeighty_ti.push(d["time"])
+                distributions_rx6700.push(d["time"])
             } else if (d.chipset == "600xt") {
-                distributions_thirtyninety.push(d["time"])
+                distributions_rx6600xt.push(d["time"])
             } else if (d.chipset == "rx6800xt") {
-                distributions_thirtysixty.push(d["time"])
+                distributions_rx6800xt.push(d["time"])
             }
         })
 
         container_g.append("g")
             .attr("transform", "translate(0, " + height / 2 + ")")
-            .call(d3.axisBottom(xScale_thirtySeventyTi))
+            .call(d3.axisBottom(xScale_rx5700))
+            .append("text")
+            .attr("y", height - 725)
+            .attr("x", width - 375)
+            .attr("font-size", "15px")
+            .attr("stroke", "black")
+            .attr("font-family", "sans-serif")
+            .text("AMD Radeon RX 5700XT");
 
         container_g.append("g")
             .attr("transform", "translate(0, " + height / 2 + ")")
-            .call(d3.axisBottom(xScale_thirtyEightyTi))
+            .call(d3.axisBottom(xScale_rx6700xt))
+            .append("text")
+            .attr("y", height - 725)
+            .attr("x", width - 100)
+            .attr("font-size", "15px")
+            .attr("stroke", "black")
+            .attr("font-family", "sans-serif")
+            .text("AMD Radeon RX 6700XT");
+
 
         container_g.append("g")
             .attr("transform", "translate(0, " + height + ")")
-            .call(d3.axisBottom(xScale_thirtyNinety))
+            .call(d3.axisBottom(xScale_rx6600xt))
+            .append("text")
+            .attr("y", height - 700)
+            .attr("x", width - 375)
+            .attr("font-size", "15px")
+            .attr("stroke", "black")
+            .attr("font-family", "sans-serif")
+            .text("AMD Radeon RX 6600XT");
+
 
         container_g.append("g")
             .attr("transform", "translate(0, " + height + ")")
-            .call(d3.axisBottom(xScale_thirtySixty))
+            .call(d3.axisBottom(xScale_rx6800xt))
+            .append("text")
+            .attr("y", height - 700)
+            .attr("x", width - 100)
+            .attr("font-size", "15px")
+            .attr("stroke", "black")
+            .attr("font-family", "sans-serif")
+            .text("AMD Radeon RX 6800XT");
+
 
         container_g.append("g")
-            .call(d3.axisLeft(yScale_thirtySeventyTi).tickFormat(function (d) {
+            .call(d3.axisLeft(yScale_rx5700).tickFormat(function (d) {
                 return d;
             }).ticks())
 
         container_g.append("g")
-            .call(d3.axisLeft(yScale_thirtyEightyTi).tickFormat(function (d) {
+            .call(d3.axisLeft(yScale_rx6700xt).tickFormat(function (d) {
                 return d;
             }).ticks())
             .attr("transform", "translate(" + ((width / 2) + 30) + "," + 0 + ")")
 
         container_g.append("g")
-            .call(d3.axisLeft(yScale_thirtyNinety).tickFormat(function (d) {
+            .call(d3.axisLeft(yScale_rx6600xt).tickFormat(function (d) {
                 return d;
             }).ticks())
 
         container_g.append("g")
-            .call(d3.axisLeft(yScale_thirtySixty).tickFormat(function (d) {
+            .call(d3.axisLeft(yScale_rx6800xt).tickFormat(function (d) {
                 return d;
             }).ticks())
             .attr("transform", "translate(" + ((width / 2) + 30) + "," + 0 + ")")
@@ -96,24 +127,27 @@ function main() {
 
         const computeBins = d3.bin()
             .value(function (d) { return d })
-            .domain(xScale_thirtySeventyTi.domain())
-            .thresholds(xScale_thirtySeventyTi.ticks(10));
+            .domain(xScale_rx5700.domain())
+            .thresholds(xScale_rx5700.ticks(10));
 
 
-        const compute_thirtyeighty_ti = computeBins(distributions_thirtyeighty_ti);
-        const compute_thirtyninety = computeBins(distributions_thirtyninety);
-        const compute_thirtyseventy_ti = computeBins(distributions_thirtyseventy_ti);
-        const compute_thirtysixty = computeBins(distributions_thirtysixty);
+        const compute_rx6700 = computeBins(distributions_rx6700);
+        const compute_rx6600xt = computeBins(distributions_rx6600xt);
+        const compute_rx5700 = computeBins(distributions_rx5700);
+        const compute_rx6800xt = computeBins(distributions_rx6800xt);
 
-        const tooltip = d3.select("body")
+        const tooltip = d3.select("#histogramAMD")
             .append("div")
             .style("opacity", 0)
             .attr("class", "tooltip")
+            .style("position", "absolute")
             .style("background-color", "white")
             .style("border", "solid")
-            .style("width", "10%")
-            .style("border-width", 50)
-            .style("border-radius", 5)
+            .style("border-width", "2px")
+            .style("border-radius", "5px")
+            .style("font-family", "sans-serif")
+            .style("transform", "translate(0px,0px)")
+            .style("width", "200px")
             .style("padding", "5px")
 
         let mouseover = function (d) {
@@ -131,87 +165,87 @@ function main() {
                 .style("stroke", "none")
                 .style("opacity", 0.5)
         }
-
-        container_g.selectAll(".bar1")
-            .data(compute_thirtyeighty_ti)
-            .enter()
-            .append("rect")
-            .attr("class", "bar1")
-            .attr("x", function (d) { return xScale_thirtyEightyTi(d.x0) })
-            .attr("y", function (d) { return yScale_thirtyEightyTi(d.length) })
-            .attr("width", function (d) { return xScale_thirtyEightyTi(d.x1) - xScale_thirtyEightyTi(d.x0) })
-            .style("fill", "#F8971D")
-            .style("opacity", 0.5)
-            .attr("height", function (d) { return height / 2 - yScale_thirtyEightyTi(d.length); })
-            .on("mouseover", mouseover)
-            .on("mousemove", (Event, d) => {
-                tooltip
-                    .html("Frequency " + d.length)
-                    .style("left", (Event.x) / 2 - 100 + "px")
-                    .style("top", (Event.y) / 2 + "px")
-            })
-            .on("mouseleave", mouseleave)
-
-        console.log(distributions_thirtyseventy_ti);
-        console.log(distributions_thirtysixty);
-
-        container_g.selectAll(".bar2")
-            .data(compute_thirtyninety)
-            .enter()
-            .append("rect")
-            .attr("class", "bar2")
-            .attr("x", function (d) { return xScale_thirtyNinety(d.x0) })
-            .attr("y", function (d) { return yScale_thirtyNinety(d.length) })
-            .attr("width", function (d) { return xScale_thirtyNinety(d.x1) - xScale_thirtyNinety(d.x0) })
-            .style("fill", "#F8971D")
-            .style("opacity", 0.5)
-            .attr("height", function (d) { return height - yScale_thirtyNinety(d.length) })
-            .on("mouseover", mouseover)
-            .on("mousemove", (Event, d) => {
-                tooltip
-                    .html("Frequency " + d.length)
-                    .style("left", (Event.x) / 2 - 100 + "px")
-                    .style("top", (Event.y) / 2 + "px")
-            })
-            .on("mouseleave", mouseleave)
-
         container_g.selectAll(".bar3")
-            .data(compute_thirtyseventy_ti)
+            .data(compute_rx5700)
             .enter()
             .append("rect")
             .attr("class", "bar3")
-            .attr("x", function (d) { return xScale_thirtySeventyTi(d.x0) })
-            .attr("y", function (d) { return yScale_thirtySeventyTi(d.length) })
-            .attr("width", function (d) { return xScale_thirtySeventyTi(d.x1) - xScale_thirtySeventyTi(d.x0) })
+            .attr("x", function (d) { return xScale_rx5700(d.x0) })
+            .attr("y", function (d) { return yScale_rx5700(d.length) })
+            .attr("width", function (d) { return xScale_rx5700(d.x1) - xScale_rx5700(d.x0) })
             .style("fill", "#F8971D")
             .style("opacity", 0.5)
-            .attr("height", function (d) { return height / 2 - yScale_thirtySeventyTi(d.length); })
+            .attr("height", function (d) { return height / 2 - yScale_rx5700(d.length); })
             .on("mouseover", mouseover)
-            .on("mousemove", (Event, d) => {
+            .on("mousemove", (event, d) => {
                 tooltip
                     .html("Frequency " + d.length)
-                    .style("left", (Event.x) / 2 - 100 + "px")
-                    .style("top", (Event.y) / 2 + "px")
+                    .style("left", event.x + 10 + "px")
+                    .style("top", event.y + (1700) + "px")
+            })
+            .on("mouseleave", mouseleave)
+
+
+        container_g.selectAll(".bar1")
+            .data(compute_rx6700)
+            .enter()
+            .append("rect")
+            .attr("class", "bar1")
+            .attr("x", function (d) { return xScale_rx6700xt(d.x0) })
+            .attr("y", function (d) { return yScale_rx6700xt(d.length) })
+            .attr("width", function (d) { return xScale_rx6700xt(d.x1) - xScale_rx6700xt(d.x0) })
+            .style("fill", "#F8971D")
+            .style("opacity", 0.5)
+            .attr("height", function (d) { return height / 2 - yScale_rx6700xt(d.length); })
+            .on("mouseover", mouseover)
+            .on("mousemove", (event, d) => {
+                tooltip
+                    .html("Frequency " + d.length)
+                    .style("left", event.x + 10 + "px")
+                    .style("top", event.y + (1700) + "px")
+            })
+            .on("mouseleave", mouseleave)
+
+        console.log(distributions_rx5700);
+        console.log(distributions_rx6800xt);
+
+        container_g.selectAll(".bar2")
+            .data(compute_rx6600xt)
+            .enter()
+            .append("rect")
+            .attr("class", "bar2")
+            .attr("x", function (d) { return xScale_rx6600xt(d.x0) })
+            .attr("y", function (d) { return yScale_rx6600xt(d.length) })
+            .attr("width", function (d) { return xScale_rx6600xt(d.x1) - xScale_rx6600xt(d.x0) })
+            .style("fill", "#F8971D")
+            .style("opacity", 0.5)
+            .attr("height", function (d) { return height - yScale_rx6600xt(d.length) })
+            .on("mouseover", mouseover)
+            .on("mousemove", (event, d) => {
+                tooltip
+                    .html("Frequency " + d.length)
+                    .style("left", event.x + 10 + "px")
+                    .style("top", event.y + (1700) + "px")
             })
             .on("mouseleave", mouseleave)
 
         container_g.selectAll(".bar4")
-            .data(compute_thirtysixty)
+            .data(compute_rx6800xt)
             .enter()
             .append("rect")
             .attr("class", "bar4")
-            .attr("x", function (d) { return xScale_thirtySixty(d.x0) })
-            .attr("y", function (d) { return yScale_thirtySixty(d.length) })
-            .attr("width", function (d) { return xScale_thirtySixty(d.x1) - xScale_thirtySixty(d.x0) })
+            .attr("x", function (d) { return xScale_rx6800xt(d.x0) })
+            .attr("y", function (d) { return yScale_rx6800xt(d.length) })
+            .attr("width", function (d) { return xScale_rx6800xt(d.x1) - xScale_rx6800xt(d.x0) })
             .style("fill", "#F8971D")
             .style("opacity", 0.4)
-            .attr("height", function (d) { return height - yScale_thirtySixty(d.length); })
+            .attr("height", function (d) { return height - yScale_rx6800xt(d.length); })
             .on("mouseover", mouseover)
-            .on("mousemove", (Event, d) => {
+            .on("mousemove", (event, d) => {
                 tooltip
                     .html("Frequency " + d.length)
-                    .style("left", (Event.x) / 2 - 100 + "px")
-                    .style("top", (Event.y) / 2 + "px")
+                    .style("left", event.x + 10 + "px")
+                    .style("top", event.y + (1700) + "px")
             })
             .on("mouseleave", mouseleave)
     })

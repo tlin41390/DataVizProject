@@ -1,11 +1,12 @@
 function main() {
-    const canvasWidth = 600;
-    const canvasHeight = 600;
+    const canvasWidth = 700;
+    const canvasHeight = 700;
 
     const svg = d3.select("#bubble_chart")
         .append("svg")
         .attr("width", canvasWidth)
         .attr("height", canvasHeight)
+
 
     d3.csv("CSV/gpu_counts.csv").then((data) => {
 

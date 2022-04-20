@@ -43,6 +43,14 @@ function main() {
             .call(d3.axisBottom(xScale_thirty_sixty).tickFormat(function (d) {
                 return d3.timeFormat("%b")(d);
             }))
+            .append("text")
+            .attr("y", height - 775)
+            .attr("x", width - 375)
+            .attr("font-size", "15px")
+            .attr("stroke", "black")
+            .attr("font-family", "sans-serif")
+            .text("Nvidia GeForce RTX 3060");
+
 
         container_g.append("g")
             .attr("transform", "translate(-30," + 0 + ")")
@@ -91,6 +99,14 @@ function main() {
             .call(d3.axisBottom(xScale_thirty_seventy_ti).tickFormat(function (d) {
                 return d3.timeFormat("%b")(d);
             }))
+            .attr("transform", "translate(0, " + height / 2 + ")")
+            .append("text")
+            .attr("y", height - 775)
+            .attr("x", width - 100)
+            .attr("font-size", "15px")
+            .attr("stroke", "black")
+            .attr("font-family", "sans-serif")
+            .text("Nvidia GeForce RTX 3070TI");
 
         container_g.append("g")
             .attr("transform", "translate(" + (width / 2 + 30) + ",0)")
@@ -139,7 +155,13 @@ function main() {
             .attr("transform", "translate(-30," + (height + 80) + ")")
             .call(d3.axisBottom(xScale_thirty_eighty_ti).tickFormat(function (d) {
                 return d3.timeFormat("%b")(d);
-            }))
+            })).append("text")
+            .attr("y", height - 775)
+            .attr("x", width - 375)
+            .attr("font-size", "15px")
+            .attr("stroke", "black")
+            .attr("font-family", "sans-serif")
+            .text("Nvidia GeForce RTX 3080TI");
 
         container_g.append("g")
             .attr("transform", "translate(-30," + (height / 2 + 80) + ")")
@@ -189,7 +211,13 @@ function main() {
             .attr("transform", "translate(0," + (height + 80) + ")")
             .call(d3.axisBottom(xScale_thirty_ninety).tickFormat(function (d) {
                 return d3.timeFormat("%b")(d);
-            }))
+            })).append("text")
+            .attr("y", height - 775)
+            .attr("x", width - 100)
+            .attr("font-size", "15px")
+            .attr("stroke", "black")
+            .attr("font-family", "sans-serif")
+            .text("Nvidia GeForce RTX 3090");
 
         container_g.append("g")
             .attr("transform", "translate(" + (width / 2 + 30) + "," + (height / 2 + 80) + ")")

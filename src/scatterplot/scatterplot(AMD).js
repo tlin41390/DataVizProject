@@ -3,7 +3,7 @@ function main() {
     const canvasHeight = 800;
     const margin = 300;
 
-    const svg = d3.select("#scatterplot").append("svg")
+    const svg = d3.select("#scatterplot-AMD").append("svg")
         .attr("width", canvasWidth)
         .attr("height", canvasHeight)
 
@@ -16,7 +16,7 @@ function main() {
         .attr("y", 50)
         .attr("font-size", "20px")
         .attr("font-family", "sans-serif")
-        .text("GPU prices in relation to Etherium Prices(Nvidia)")
+        .text("GPU prices in relation to Etherium Prices(AMD)")
 
 
     const xScale = d3.scaleLinear().range([0, width]);
@@ -25,9 +25,9 @@ function main() {
 
     const container_g = svg.append("g").attr("transform", "translate(100,100)")
 
-    d3.csv("../../CSV/ebay_prices(Nvidia).csv").then(data => {
+    d3.csv("../../CSV/ebay_prices(AMD).csv").then(data => {
         xScale.domain([2000, 4600]);
-        yScale.domain([0, 3000]);
+        yScale.domain([0, 2000]);
 
         //append the circles on the graph and see what color scale to use based on the publisher
         container_g.selectAll(".dot")
@@ -46,8 +46,8 @@ function main() {
         container_g.append("g")
             .attr("transform", "translate(0, " + 500 + ")")
             .call(d3.axisBottom(xScale).tickFormat(function (d) {
-                return d + "$";
-            }).ticks(15))
+                return d+"$";
+            }).ticks(10))
             .append("text")
             .attr("y", height - 450)
             .attr("x", width - 250)
@@ -58,16 +58,15 @@ function main() {
 
         container_g.append("g")
             .call(d3.axisLeft(yScale).tickFormat(function (d) {
-                return d + "$";
-            }).ticks(15))
-            .append("text")
+                return d+"$";
+            }).ticks(15)).append("text")
             .attr("font-size", "25px")
             .attr("transform", "rotate(-90)")
             .attr("y", 40)
             .attr("x", -150)
             .attr("dy", "-4.1em")
             .attr("stroke", "black")
-            .text("GPU Price");
+            .text("GPUs Price");
     });
 }
 main();

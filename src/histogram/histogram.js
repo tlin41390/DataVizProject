@@ -8,6 +8,7 @@ function main() {
         .attr("width", canvasWidth)
         .attr("height", canvasHeight)
 
+
     const width = svg.attr("width") - margin;
     const height = svg.attr("height") - margin;
 
@@ -59,18 +60,45 @@ function main() {
         container_g.append("g")
             .attr("transform", "translate(0, " + height / 2 + ")")
             .call(d3.axisBottom(xScale_thirtySeventyTi))
+            .append("text")
+            .attr("y", height - 725)
+            .attr("x", width - 375)
+            .attr("font-size", "15px")
+            .attr("stroke", "black")
+            .attr("font-family", "sans-serif")
+            .text("Nvidia GeForce RTX 3070TI");
 
         container_g.append("g")
             .attr("transform", "translate(0, " + height / 2 + ")")
             .call(d3.axisBottom(xScale_thirtyEightyTi))
+            .append("text")
+            .attr("y", height - 725)
+            .attr("x", width - 100)
+            .attr("font-size", "15px")
+            .attr("stroke", "black")
+            .attr("font-family", "sans-serif")
+            .text("Nvidia GeForce RTX 3080TI");
 
         container_g.append("g")
             .attr("transform", "translate(0, " + height + ")")
             .call(d3.axisBottom(xScale_thirtyNinety))
+            .append("text")
+            .attr("y", height - 700)
+            .attr("x", width - 375)
+            .attr("font-size", "15px")
+            .attr("stroke", "black")
+            .attr("font-family", "sans-serif")
+            .text("Nvidia GeForce RTX 3090");
 
         container_g.append("g")
             .attr("transform", "translate(0, " + height + ")")
-            .call(d3.axisBottom(xScale_thirtySixty))
+            .call(d3.axisBottom(xScale_thirtySixty)).append("text")
+            .attr("y", height - 700)
+            .attr("x", width - 100)
+            .attr("font-size", "15px")
+            .attr("stroke", "black")
+            .attr("font-family", "sans-serif")
+            .text("Nvidia GeForce RTX 3060");
 
         container_g.append("g")
             .call(d3.axisLeft(yScale_thirtySeventyTi).tickFormat(function (d) {
@@ -137,6 +165,27 @@ function main() {
                 .style("opacity", 0.5)
         }
 
+        container_g.selectAll(".bar3")
+            .data(compute_thirtyseventy_ti)
+            .enter()
+            .append("rect")
+            .attr("class", "bar3")
+            .attr("x", function (d) { return xScale_thirtySeventyTi(d.x0) })
+            .attr("y", function (d) { return yScale_thirtySeventyTi(d.length) })
+            .attr("width", function (d) { return xScale_thirtySeventyTi(d.x1) - xScale_thirtySeventyTi(d.x0) })
+            .style("fill", "#76b900")
+            .style("opacity", 0.5)
+            .attr("height", function (d) { return height / 2 - yScale_thirtySeventyTi(d.length); })
+            .on("mouseover", mouseover)
+            .on("mousemove", (event, d) => {
+                Tooltip
+                    .html("Frequency " + d.length)
+                    .style("left", event.x + 10 + "px")
+                    .style("top", event.y + (1700) + "px")
+            })
+            .on("mouseleave", mouseleave)
+
+
         container_g.selectAll(".bar1")
             .data(compute_thirtyeighty_ti)
             .enter()
@@ -145,7 +194,7 @@ function main() {
             .attr("x", function (d) { return xScale_thirtyEightyTi(d.x0) })
             .attr("y", function (d) { return yScale_thirtyEightyTi(d.length) })
             .attr("width", function (d) { return xScale_thirtyEightyTi(d.x1) - xScale_thirtyEightyTi(d.x0) })
-            .style("fill", "green")
+            .style("fill", "#76b900")
             .style("opacity", 0.5)
             .attr("height", function (d) { return height / 2 - yScale_thirtyEightyTi(d.length); })
             .on("mouseover", mouseover)
@@ -153,7 +202,7 @@ function main() {
                 Tooltip
                     .html("Frequency " + d.length)
                     .style("left", event.x + 30 + "px")
-                    .style("top", event.y + (1000) + "px")
+                    .style("top", event.y + (1700) + "px")
             })
             .on("mouseleave", mouseleave)
 
@@ -168,7 +217,7 @@ function main() {
             .attr("x", function (d) { return xScale_thirtyNinety(d.x0) })
             .attr("y", function (d) { return yScale_thirtyNinety(d.length) })
             .attr("width", function (d) { return xScale_thirtyNinety(d.x1) - xScale_thirtyNinety(d.x0) })
-            .style("fill", "green")
+            .style("fill", "#76b900")
             .style("opacity", 0.5)
             .attr("height", function (d) { return height - yScale_thirtyNinety(d.length) })
             .on("mouseover", mouseover)
@@ -176,27 +225,7 @@ function main() {
                 Tooltip
                     .html("Frequency " + d.length)
                     .style("left", event.x + 10 + "px")
-                    .style("top", event.y + (1000) + "px")
-            })
-            .on("mouseleave", mouseleave)
-
-        container_g.selectAll(".bar3")
-            .data(compute_thirtyseventy_ti)
-            .enter()
-            .append("rect")
-            .attr("class", "bar3")
-            .attr("x", function (d) { return xScale_thirtySeventyTi(d.x0) })
-            .attr("y", function (d) { return yScale_thirtySeventyTi(d.length) })
-            .attr("width", function (d) { return xScale_thirtySeventyTi(d.x1) - xScale_thirtySeventyTi(d.x0) })
-            .style("fill", "green")
-            .style("opacity", 0.5)
-            .attr("height", function (d) { return height / 2 - yScale_thirtySeventyTi(d.length); })
-            .on("mouseover", mouseover)
-            .on("mousemove", (event, d) => {
-                Tooltip
-                    .html("Frequency " + d.length)
-                    .style("left", event.x + 10 + "px")
-                    .style("top", event.y + (1000) + "px")
+                    .style("top", event.y + (1700) + "px")
             })
             .on("mouseleave", mouseleave)
 
@@ -208,7 +237,7 @@ function main() {
             .attr("x", function (d) { return xScale_thirtySixty(d.x0) })
             .attr("y", function (d) { return yScale_thirtySixty(d.length) })
             .attr("width", function (d) { return xScale_thirtySixty(d.x1) - xScale_thirtySixty(d.x0) })
-            .style("fill", "green")
+            .style("fill", "#76b900")
             .style("opacity", 0.5)
             .attr("height", function (d) { return height - yScale_thirtySixty(d.length); })
             .on("mouseover", mouseover)
@@ -216,7 +245,7 @@ function main() {
                 Tooltip
                     .html("Frequency " + d.length)
                     .style("left", event.x + 10 + "px")
-                    .style("top", event.y + (1000) + "px")
+                    .style("top", event.y + (1700) + "px")
             })
             .on("mouseleave", mouseleave)
     })
