@@ -52,12 +52,30 @@
 
   </section>
   <section class="section">
+    <h1 class="title">Line Chart of GPU market prices over time compared to MSRP</h1>
+    <p>This Line Chart here displays the price trend of various GPUS from September 2021 to March 2022. The dropdown
+      menu on top will display the GPUs from both AMD, and Nvidia for the user to play with. One thing I found
+      interestgin for the trend of GPU data is that they all seem to share the similiar trend of values peeking up
+      slightly torwards the end of the year, and then going down a bit.</p>
+    <div class="select">
+      <select></select>
+    </div>
+    <div id="linechart"></div>
+    <script src="src/line chart/linechart(v2).js"></script>
+
+  </section>
+
+  </section>
+  <section class="section">
     <h1 class="title">Histograms of Distributions of GPU sellout times within the hour</h1>
     <div class="flex">
       <div id="histogram"></div>
       <script src="src/histogram/histogram.js"></script>
       <div id="histogramAMD"></div>
       <script src="src/histogram/histogram(AMD).js"></script>
+    </div>
+    <label>Number of Bins</label>
+    <input class = "input" type="number" min="1" max="100" step="30" value="20" id="nBin">
   </section>
 
   </section>
@@ -70,23 +88,14 @@
       <script src="src/violin plot/violinplot(AMD).js"></script>
   </section>
 
-  </section>
-  <section class="section">
-    <h1 class="title">Line Charts of GPU market prices over time compared to MSRP</h1>
-    <div class="flex">
-      <div id="linechart-Nvidia"></div>
-      <script src="src/line chart/linechart.js"></script>
-      <div id="linechart-AMD"></div>
-      <script src="src/line chart/linechart(AMD).js"></script>
-  </section>
 
   </section>
   <section class="section">
     <h1 class="title">Scatter Plot of Etherium Prices In Relation to GPU Prices</h1>
-      <div id="scatterplot"></div>
-      <script src="src/scatterplot/scatterplot.js"></script>
-      <div id="scatterplot-AMD"></div>
-      <script src="src/scatterplot/scatterplot(AMD).js"></script>
+    <div id="scatterplot"></div>
+    <script src="src/scatterplot/scatterplot.js"></script>
+    <div id="scatterplot-AMD"></div>
+    <script src="src/scatterplot/scatterplot(AMD).js"></script>
   </section>
 </body>
 
