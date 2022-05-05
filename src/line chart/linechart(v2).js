@@ -66,8 +66,8 @@ function main() {
             .datum(data)
             .attr("d", d3.line()
                 .x((d)=>{return xScale(d.date) })
-                .y((d)=>{return yScale(+d["MSRP_3060"])})
-            ).attr("stroke","blue")
+                .y((d)=>{return yScale(+d["MSRP GeForce RTX 3060 12GB"])})
+            ).attr("stroke","black")
             .style("stroke-width",4)
             .style("fill","none")
 
@@ -84,7 +84,7 @@ function main() {
         function update(selectedGroup) {
 
             // Create new data with the selection?
-            var dataFilter = data.map(function (d) { return { date: parseTime(d.Time), value: d[selectedGroup],msrp:d[selectedGroup] } })
+            var dataFilter = data.map(function (d) { return { date: parseTime(d.Time), value: d[selectedGroup],msrp:d["MSRP "+ selectedGroup] } })
 
             // Give these new data to update line
             line
@@ -95,6 +95,7 @@ function main() {
                     .x(function (d) { return xScale(+d.date) })
                     .y(function (d) { return yScale(+d.value) })
                 )
+                .attr("stroke","green")
             dot
                 .data(dataFilter)
                 .transition()
@@ -104,6 +105,13 @@ function main() {
 
             msrpLine
                 .datum(dataFilter)
+                .transition()
+                .duration(1000)
+                .attr("d", d3.line()
+                .x(function (d) { return xScale(+d.date) })
+                .y(function (d) { return yScale(+d.msrp) })
+            )
+
         }
 
         // When the button is changed, run the updateChart function
