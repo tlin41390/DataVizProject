@@ -29,16 +29,16 @@ function main() {
 
     d3.csv("CSV/stock_and_time-Nvidia.csv").then(data => {
         xScale_thirtySeventyTi.domain([0, 60]);
-        yScale_thirtySeventyTi.domain([0, 400]);
+        yScale_thirtySeventyTi.domain([0, 300]);
 
         xScale_thirtyEightyTi.domain([0, 60]);
-        yScale_thirtyEightyTi.domain([0, 400]);
+        yScale_thirtyEightyTi.domain([0, 300]);
 
         xScale_thirtyNinety.domain([0, 60]);
-        yScale_thirtyNinety.domain([0, 400]);
+        yScale_thirtyNinety.domain([0, 300]);
 
         xScale_thirtySixty.domain([0, 60]);
-        yScale_thirtySixty.domain([0, 400]);
+        yScale_thirtySixty.domain([0, 300]);
 
         let distributions_thirtysixty = []
         let distributions_thirtyeighty_ti = []
@@ -103,23 +103,23 @@ function main() {
         container_g.append("g")
             .call(d3.axisLeft(yScale_thirtySeventyTi).tickFormat(function (d) {
                 return d;
-            }).ticks())
+            }).ticks(5))
 
         container_g.append("g")
             .call(d3.axisLeft(yScale_thirtyEightyTi).tickFormat(function (d) {
                 return d;
-            }).ticks())
+            }).ticks(5))
             .attr("transform", "translate(" + ((width / 2) + 30) + "," + 0 + ")")
 
         container_g.append("g")
             .call(d3.axisLeft(yScale_thirtyNinety).tickFormat(function (d) {
                 return d;
-            }).ticks())
+            }).ticks(5))
 
         container_g.append("g")
             .call(d3.axisLeft(yScale_thirtySixty).tickFormat(function (d) {
                 return d;
-            }).ticks())
+            }).ticks(5))
             .attr("transform", "translate(" + ((width / 2) + 30) + "," + 0 + ")")
 
 
@@ -161,7 +161,7 @@ function main() {
             Tooltip
                 .style("opacity", 0)
             d3.select(this)
-                .style("stroke", "none")
+                .style("stroke", "white")
                 .style("opacity", 0.5)
         }
 
@@ -176,12 +176,13 @@ function main() {
             .style("fill", "#76b900")
             .style("opacity", 0.5)
             .attr("height", function (d) { return height / 2 - yScale_thirtySeventyTi(d.length); })
+            .style("stroke", "white")
             .on("mouseover", mouseover)
             .on("mousemove", (event, d) => {
                 Tooltip
-                    .html("Frequency " + d.length)
-                    .style("left", event.x + 10 + "px")
-                    .style("top", event.y + (1700) + "px")
+                    .html("Frequency " + d.length + "<br>" + "Range " + Math.min(...d) + "-" + Math.max(...d))
+                    .style("left", event.x + 30 + "px")
+                    .style("top", event.y + (3000) + "px")
             })
             .on("mouseleave", mouseleave)
 
@@ -197,12 +198,13 @@ function main() {
             .style("fill", "#76b900")
             .style("opacity", 0.5)
             .attr("height", function (d) { return height / 2 - yScale_thirtyEightyTi(d.length); })
+            .style("stroke", "white")
             .on("mouseover", mouseover)
             .on("mousemove", (event, d) => {
                 Tooltip
-                    .html("Frequency " + d.length)
+                    .html("Frequency " + d.length + "<br>" + "Range " + Math.min(...d) + "-" + Math.max(...d))
                     .style("left", event.x + 30 + "px")
-                    .style("top", event.y + (1700) + "px")
+                    .style("top", event.y + (3000) + "px")
             })
             .on("mouseleave", mouseleave)
 
@@ -219,13 +221,14 @@ function main() {
             .attr("width", function (d) { return xScale_thirtyNinety(d.x1) - xScale_thirtyNinety(d.x0) })
             .style("fill", "#76b900")
             .style("opacity", 0.5)
+            .attr("stroke", "white")
             .attr("height", function (d) { return height - yScale_thirtyNinety(d.length) })
             .on("mouseover", mouseover)
             .on("mousemove", (event, d) => {
                 Tooltip
-                    .html("Frequency " + d.length)
-                    .style("left", event.x + 10 + "px")
-                    .style("top", event.y + (1700) + "px")
+                    .html("Frequency " + d.length + "<br>" + "Range " + Math.min(...d) + "-" + Math.max(...d))
+                    .style("left", event.x + 30 + "px")
+                    .style("top", event.y + 3000 + "px")
             })
             .on("mouseleave", mouseleave)
 
@@ -240,12 +243,13 @@ function main() {
             .style("fill", "#76b900")
             .style("opacity", 0.5)
             .attr("height", function (d) { return height - yScale_thirtySixty(d.length); })
+            .style("stroke", "white")
             .on("mouseover", mouseover)
             .on("mousemove", (event, d) => {
                 Tooltip
-                    .html("Frequency " + d.length)
-                    .style("left", event.x + 10 + "px")
-                    .style("top", event.y + (1700) + "px")
+                    .html("Frequency " + d.length + "<br>" + "Range " + Math.min(...d) + "-" + Math.max(...d))
+                    .style("left", event.x + 30 + "px")
+                    .style("top", event.y + 3000 + "px")
             })
             .on("mouseleave", mouseleave)
     })

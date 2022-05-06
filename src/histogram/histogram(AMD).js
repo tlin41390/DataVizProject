@@ -27,16 +27,16 @@ function main() {
 
     d3.csv("CSV/stock_and_time-AMD.csv").then(data => {
         xScale_rx5700.domain([0, 60]);
-        yScale_rx5700.domain([0, 400]);
+        yScale_rx5700.domain([0, 300]);
 
         xScale_rx6700xt.domain([0, 60]);
-        yScale_rx6700xt.domain([0, 400]);
+        yScale_rx6700xt.domain([0, 300]);
 
         xScale_rx6600xt.domain([0, 60]);
-        yScale_rx6600xt.domain([0, 400]);
+        yScale_rx6600xt.domain([0, 300]);
 
         xScale_rx6800xt.domain([0, 60]);
-        yScale_rx6800xt.domain([0, 400]);
+        yScale_rx6800xt.domain([0, 300]);
 
         let distributions_rx6800xt = []
         let distributions_rx6700 = []
@@ -105,23 +105,23 @@ function main() {
         container_g.append("g")
             .call(d3.axisLeft(yScale_rx5700).tickFormat(function (d) {
                 return d;
-            }).ticks())
+            }).ticks(5))
 
         container_g.append("g")
             .call(d3.axisLeft(yScale_rx6700xt).tickFormat(function (d) {
                 return d;
-            }).ticks())
+            }).ticks(5))
             .attr("transform", "translate(" + ((width / 2) + 30) + "," + 0 + ")")
 
         container_g.append("g")
             .call(d3.axisLeft(yScale_rx6600xt).tickFormat(function (d) {
                 return d;
-            }).ticks())
+            }).ticks(5))
 
         container_g.append("g")
             .call(d3.axisLeft(yScale_rx6800xt).tickFormat(function (d) {
                 return d;
-            }).ticks())
+            }).ticks(5))
             .attr("transform", "translate(" + ((width / 2) + 30) + "," + 0 + ")")
 
 
@@ -136,7 +136,7 @@ function main() {
         const compute_rx5700 = computeBins(distributions_rx5700);
         const compute_rx6800xt = computeBins(distributions_rx6800xt);
 
-        const tooltip = d3.select("#histogramAMD")
+        const Tooltip = d3.select("#histogramAMD")
             .append("div")
             .style("opacity", 0)
             .attr("class", "tooltip")
@@ -151,7 +151,7 @@ function main() {
             .style("padding", "5px")
 
         let mouseover = function (d) {
-            tooltip
+            Tooltip
                 .style("opacity", 1)
             d3.select(this)
                 .style("stroke", "black")
@@ -159,10 +159,10 @@ function main() {
         }
 
         let mouseleave = function (d) {
-            tooltip
+            Tooltip
                 .style("opacity", 0)
             d3.select(this)
-                .style("stroke", "none")
+                .style("stroke", "white")
                 .style("opacity", 0.5)
         }
         container_g.selectAll(".bar3")
@@ -176,12 +176,13 @@ function main() {
             .style("fill", "#F8971D")
             .style("opacity", 0.5)
             .attr("height", function (d) { return height / 2 - yScale_rx5700(d.length); })
+            .style("stroke", "white")
             .on("mouseover", mouseover)
             .on("mousemove", (event, d) => {
-                tooltip
-                    .html("Frequency " + d.length)
-                    .style("left", event.x + 10 + "px")
-                    .style("top", event.y + (1700) + "px")
+                Tooltip
+                    .html("Frequency " + d.length + "<br>" + "Range " + Math.min(...d) + "-" + Math.max(...d))
+                    .style("left", event.x + 30 + "px")
+                    .style("top", event.y + (3000) + "px")
             })
             .on("mouseleave", mouseleave)
 
@@ -197,12 +198,13 @@ function main() {
             .style("fill", "#F8971D")
             .style("opacity", 0.5)
             .attr("height", function (d) { return height / 2 - yScale_rx6700xt(d.length); })
+            .style("stroke", "white")
             .on("mouseover", mouseover)
             .on("mousemove", (event, d) => {
-                tooltip
-                    .html("Frequency " + d.length)
-                    .style("left", event.x + 10 + "px")
-                    .style("top", event.y + (1700) + "px")
+                Tooltip
+                    .html("Frequency " + d.length + "<br>" + "Range " + Math.min(...d) + "-" + Math.max(...d))
+                    .style("left", event.x + 30 + "px")
+                    .style("top", event.y + (3000) + "px")
             })
             .on("mouseleave", mouseleave)
 
@@ -220,12 +222,13 @@ function main() {
             .style("fill", "#F8971D")
             .style("opacity", 0.5)
             .attr("height", function (d) { return height - yScale_rx6600xt(d.length) })
+            .style("stroke", "white")
             .on("mouseover", mouseover)
             .on("mousemove", (event, d) => {
-                tooltip
-                    .html("Frequency " + d.length)
-                    .style("left", event.x + 10 + "px")
-                    .style("top", event.y + (1700) + "px")
+                Tooltip
+                    .html("Frequency " + d.length + "<br>" + "Range " + Math.min(...d) + "-" + Math.max(...d))
+                    .style("left", event.x + 30 + "px")
+                    .style("top", event.y + (3000) + "px")
             })
             .on("mouseleave", mouseleave)
 
@@ -240,12 +243,13 @@ function main() {
             .style("fill", "#F8971D")
             .style("opacity", 0.4)
             .attr("height", function (d) { return height - yScale_rx6800xt(d.length); })
+            .style("stroke", "white")
             .on("mouseover", mouseover)
             .on("mousemove", (event, d) => {
-                tooltip
-                    .html("Frequency " + d.length)
-                    .style("left", event.x + 10 + "px")
-                    .style("top", event.y + (1700) + "px")
+                Tooltip
+                    .html("Frequency " + d.length).html("Frequency " + d.length + "<br>" + "Range " + Math.min(...d) + "-" + Math.max(...d))
+                    .style("left", event.x + 30 + "px")
+                    .style("top", event.y + (3000) + "px")
             })
             .on("mouseleave", mouseleave)
     })
