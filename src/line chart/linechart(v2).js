@@ -10,7 +10,6 @@ function main() {
     const width = svg.attr("width") - margin;
     const height = svg.attr("height") - margin;
 
-
     const parseTime = d3.timeParse("%y-%b")
 
     const container_g = svg.append("g")
@@ -107,6 +106,9 @@ function main() {
             .attr("r", "7")
             .style("stroke", "white")
             .duration(1000)
+
+        // Features of the annotation
+
 
         update("GeForce RTX 3060 12GB")
 

@@ -1,18 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="has-navbar-fixed-top" lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>The Current State Of the Graphics Processing Unit Market</title>
+  <title id="beginning">The Current State Of the Graphics Processing Unit Market</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"
     integrity="sha384-l+HksIGR+lyuyBo1+1zCBSRt6v4yklWu7RbG0Cv+jDLDD9WFcEIwZLHioVB4Wkau" crossorigin="anonymous"
     referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
 </head>
+<nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="https://tlin41390.github.io/GPU_Visualizations/">
+      <img src="gpu.png" width="40" height="40">
+    </a>
+
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" href="#proportional circles">
+        Circles
+      </a>
+
+      <a class="navbar-item" href="#heatmap">
+        HeatMap
+      </a>
+
+      <a class="navbar-item" href="#interactive linechart">
+        Line Chart
+      </a>
+
+      <a class="navbar-item" href="#histograms">
+        Histograms
+      </a>
+      <a class="navbar-item" href="#violinplot">
+        ViolinPlots
+      </a>
+      <a class="navbar-item" href="#gpu_scatterplot">
+        Scatterplot
+      </a>
+    </div>
+  </div>
+  </div>
+
+  </div>
+</nav>
 
 <body>
   <section class="hero is-primary is-bold">
@@ -47,8 +90,9 @@
       <h1 class="title">Proportional Circles of Aggregate GPUs Sold Within Seven On Ebay</h1>
 
 
-      <p>This is a simple proportional circle visualization that represents the total sold for different GPU models with
-        half a year. The bigger the circle the more the model is sold. Hover over the circles to display the GPU model
+      <p>This is a simple proportional circle visualization that represents the total sold for different GPU models
+        within
+        half a year. The bigger the circle, the more the model is sold. Hover over the circles to display the GPU model
         and the quanitity sold. The green circles represent the Nvidia models and the orange circles represents the AMD
         models. This data was collected using Tom's Hardware's monthly tracker. Generally, we can see a larger
         representation of Nvidia GPUS as they dominate over AMD in terms of units sold for the most part.</p>
@@ -75,11 +119,10 @@
     <div class="container">
       <h1 class="title">Line Chart of GPU market prices over time compared to MSRP</h1>
       <p>This Line Chart here displays the price trend of various GPUS from September 2021 to March 2022. The dropdown
-        menu on top will display the GPUs from both AMD, and Nvidia for the user to play with. One thing I found
-        interestgin for the trend of GPU data is that they all seem to share the similiar trend of values peeking up
-        slightly torwards the end of the year, and then going down a bit. The black line below the colored line chart
-        represents the MSRP.
-        Needless to say the Ebay prcies are significantly more expensive and fluctuates alot.
+        menu on top will display the GPUs from both AMD, and Nvidia. The line chart will update when the user selects
+        what model they want to compare in the drop down menu. Hovering over the dots will display basic information on
+        how much the GPU costs at that specific month. The bottom of the chart represents MSRP, so the higher the line,
+        the more expensive it is relative to its MSRP.
       </p>
       <br>
     </div>
@@ -97,14 +140,15 @@
   </section>
 
   </section>
-  <section class="section">
+  <section class="section" id="histograms">
     <div class="container">
       <h1 class="title">Histograms of Distributions of GPU sellout times within the hour</h1>
       <p>These here are small multiples of different histograms that measures the time it takes for GPUs to sell out. I
-        scraped the data from an active tracker and then represent the GPus with the most notifications. The bins
+        scraped the data from an active tracker and then represent the GPUs with the most notifications. The bins
         represent the minutes in increments of 5, all the way up to one hour. The y axis represents the frequency of
-        distribution between sell out times. I also incorporated hovering where users can hover over a rectangle to see
-        the frequency as well as the range of values that are in that rectangle
+        distribution between sell out times. The color represents the company with Nvidia being green and AMD being
+        orange. I also incorporated hovering where users can hover over a rectangle to see
+        the frequency as well as the range of values that are in that rectangle.
       </p>
     </div>
     <div class="columns is-centered">
@@ -119,11 +163,12 @@
   </section>
 
   </section>
-  <section class="section">
+  <section class="section" id="violinplot">
     <div class="container">
       <h1 class="title">Violin Plot of Nvidia and AMD sell out times</h1>
       <p>I created violin plots as a means to represent the distribution of GPUs that sell out in a different manner.
-        This provides a overview of where the main distribution lies. The advantage is that I can put more visualizations of the GPUs on the chart.</p>
+        This provides a overview of where the main distribution lies. The advantage is that I can put more
+        visualizations of the GPUs on the chart.</p>
     </div>
     </div>
     <div class="columns is-centered">
@@ -137,8 +182,15 @@
 
 
   </section>
-  <section class="section">
-    <h1 class="title">Scatter Plot of Etherium Prices In Relation to GPU Prices</h1>
+  <section class="section" id="gpu_scatterplot">
+    <div class="container">
+      <h1 class="title">Scatter Plot of Etherium Prices In Relation to GPU Prices</h1>
+      <p>This Scatterplot/Dotplot tries to display the correlation of prices with Etherium. Users can select what model
+        they want to compare, and then the visualization will update in real time. In addition, users can hover over the
+        plots to see the price of the GPU. Green represents Nvidia and Orange represents AMD.</p>
+      <br>
+      <br>
+    </div>
     <div class="columns is-centered">
       <div class="select" id="etherium_selector">
         <select></select>
