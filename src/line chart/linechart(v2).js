@@ -1,6 +1,6 @@
 function main() {
-    const canvasWidth = 700;
-    const canvasHeight = 700;
+    const canvasWidth = 800;
+    const canvasHeight = 800;
     const margin = 200;
 
     const svg = d3.select("#linechart").append("svg")
@@ -22,9 +22,8 @@ function main() {
         for (d of data) {
             d.date = parseTime(d.Time);
             d.prices = +d.Prices;
-            console.log(d.date);
         }
-        var groups = ["GeForce RTX 3060 12GB", "GeForce RTX 3070 Ti", "GeForce RTX 3080 Ti", "GeForce RTX 3090", "Radeon RX 6600 XT", "Radeon RX 6700 XT", "Radeon RX 6800 XT", "Radeon RX 6900 XT"]
+        var groups = ["GeForce RTX 3060 12GB", "GeForce RTX 3070", "GeForce RTX 3070 Ti", "GeForce RTX 3080", "GeForce RTX 3080 Ti", "GeForce RTX 3090", "Radeon RX 6600 XT", "Radeon RX 6700 XT", "Radeon RX 6800", "Radeon RX 6800 XT", "Radeon RX 6900 XT"]
 
         d3.select(".select").select("select")
             .selectAll("myOptions")
@@ -38,8 +37,12 @@ function main() {
             .range([0, width]);
 
         const yScale = d3.scaleLinear()
-            .domain([0, 3000])
             .range([height, 0])
+
+        const yAxis = d3.axisLeft().scale(yScale);
+
+        container_g.append("g")
+            .attr("class", "prices")
 
         container_g.append("g")
             .attr("transform", "translate(0," + width + ")")
@@ -52,77 +55,87 @@ function main() {
             .attr("font-family", "sans-serif")
             .text("Months");
 
-        container_g.append("g")
-            .call(d3.axisLeft(yScale))
+        // create a tooltip
+        const Tooltip = d3.select("#linechart")
+            .append("div")
+            .style("opacity", 0)
+            .attr("class", "column")
+            .style("position", "absolute")
+            .style("background-color", "white")
+            .style("border", "solid")
+            .style("border-width", "2px")
+            .style("border-radius", "5px")
+            .style("font-family", "sans-serif")
+            .style("width", "100px")
+            .style("padding", "5px")
 
-        var line = container_g
-            .append("g")
-            .append("path")
-            .datum(data)
-            .attr("d", d3.line()
-                .x((d) => { return xScale(d.date) })
-                .y((d) => { return yScale(+d["GeForce RTX 3060 12GB"]) })
-            )
-            .attr("stroke", "#76b900")
-            .style("stroke-width", 4)
-            .style("fill", "none")
+        let mouseover = function (d) {
+            Tooltip
+                .style("opacity", 1)
+            d3.select(this)
+                .style("stroke", "black")
+                .style("opacity", 1)
+        }
 
-        var msrpLine = container_g
-            .append("g")
-            .append("path")
-            .datum(data)
-            .attr("d", d3.line()
-                .x((d) => { return xScale(d.date) })
-                .y((d) => { return yScale(+d["MSRP GeForce RTX 3060 12GB"]) })
-            ).attr("stroke", "black")
-            .style("stroke-width", 4)
-            .style("fill", "none")
+        let mouseleave = function () {
+            Tooltip
+                .style("opacity", 0)
+                .style("left", "0px")
+                .style("top", "0px")
+            d3.select(this)
+                .style("stroke", "white")
+        }
 
-        var dot = container_g
-            .selectAll("circle")
-            .data(data)
-            .enter()
-            .append("circle")
-            .attr("cx", (d) => { return xScale(d.date) })
-            .attr("cy", (d) => { return yScale(+d["GeForce RTX 3060 12GB"]) })
-            .attr("r", 7)
-            .style("fill", "#76b900")
 
         function update(selectedGroup) {
 
-            if (selectedGroup.includes("RTX")) {
-                console.log("banana")
-            }
-
-            // Create new data with the selection?
             var dataFilter = data.map(function (d) { return { date: parseTime(d.Time), value: d[selectedGroup], msrp: d["MSRP " + selectedGroup] } })
 
-            // Give these new data to update line
-            line
-                .datum(dataFilter)
+            yScale.domain([d3.min(dataFilter, function (d) { return +d.msrp }), d3.max(dataFilter, function (d) { return +d.value })])
+
+            container_g.selectAll(".prices")
                 .transition()
                 .duration(1000)
+                .call(yAxis.ticks(15).tickFormat(function(d){return "$" + d}))
+            // Give these new data to update line
+            var line = container_g.selectAll(".lines")
+                .data([dataFilter])
+
+            line
+                .join("path")
+                .attr("class", "lines")
+                .transition()
+                .duration(1000)
+                .style("fill", "none")
                 .attr("d", d3.line()
                     .x(function (d) { return xScale(+d.date) })
                     .y(function (d) { return yScale(+d.value) })
                 )
-                .attr("stroke", function (d) { if (selectedGroup.includes("RTX")) { return "#76b900" } else { return "#F89713" } })
-            dot
+                .attr("stroke", function () { if (selectedGroup.includes("RTX")) { return "#76b900" } else { return "#F89713" } })
+                .attr("stroke-width", "4")
+
+            let dot = container_g.selectAll(".points")
                 .data(dataFilter)
+
+            dot.join("circle")
+                .attr("class", "points")
                 .transition()
-                .duration(1000)
                 .attr("cx", function (d) { return xScale(+d.date) })
                 .attr("cy", function (d) { return yScale(+d.value) })
-                .style("fill", function (d) { if (selectedGroup.includes("RTX")) { return "#76b900" } else { return "#F89713" } })
-
-            msrpLine
-                .datum(dataFilter)
-                .transition()
+                .attr("r", "7")
+                .attr("stroke","white")
                 .duration(1000)
-                .attr("d", d3.line()
-                    .x(function (d) { return xScale(+d.date) })
-                    .y(function (d) { return yScale(+d.msrp) })
-                )
+
+                .style("fill", function (d) { if (selectedGroup.includes("RTX")) { return "#76b900" } else { return "#F89713" } })
+            dot
+                .on("mouseover", mouseover)
+                .on("mousemove", (event, d) => {
+                    Tooltip
+                        .html("Price: $" + +d.value)
+                        .style("left", event.pageX + 30 + "px")
+                        .style("top", event.pageY + "px")
+                })
+                .on("mouseleave", mouseleave)
 
         }
 
@@ -133,6 +146,7 @@ function main() {
             // run the updateChart function with this selected option
             update(selectedOption)
         })
+        update("GeForce RTX 3060 12GB")
     })
 }
 main();

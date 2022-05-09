@@ -1,13 +1,13 @@
 function main() {
-    const canvasWidth = 800;
-    const canvasHeight = 800;
-    const margin = 300;
+    const canvasWidth = 1200;
+    const canvasHeight = 700;
+    const margin = 200;
 
     const svg = d3.select("#scatterplot").append("svg")
         .attr("width", canvasWidth)
         .attr("height", canvasHeight)
 
-    const width = svg.attr("width") - margin;
+    const width = svg.attr("width") - margin - 500;
     const height = svg.attr("height") - margin;
     //text for the canvas of the title
     svg.append("text")
@@ -26,8 +26,13 @@ function main() {
     const container_g = svg.append("g").attr("transform", "translate(100,100)")
 
     d3.csv("CSV/ebay_prices(Nvidia).csv").then(data => {
-        xScale.domain([2000, 4600]);
-        yScale.domain([0, 3000]);
+        var models = new Set();
+
+        data.forEach((d) => {
+            models.add(d.GPUs);
+        })
+        xScale.domain([2400, 4600]);
+        yScale.domain([500, 3000]);
 
         //append the circles on the graph and then see what color scale to use based on the publisher
         container_g.selectAll(".dot")
@@ -36,10 +41,11 @@ function main() {
             .style("fill", function (d) {
                 return color(d.GPUs)
             })
-            .attr("class", "dot")
             .attr("r", 4)
             .attr("cx", function (d) { return xScale(+d["Etherium Price"]); })
             .attr("cy", function (d) { return yScale(+d["Prices"]); })
+            .attr("id",function(d){return d.GPUs});
+
         //actions to display and remove tooltip
 
         //Display the X-axis
@@ -47,7 +53,7 @@ function main() {
             .attr("transform", "translate(0, " + 500 + ")")
             .call(d3.axisBottom(xScale).tickFormat(function (d) {
                 return d + "$";
-            }).ticks(15))
+            }).ticks(10))
             .append("text")
             .attr("y", height - 450)
             .attr("x", width - 250)
@@ -68,6 +74,24 @@ function main() {
             .attr("dy", "-4.1em")
             .attr("stroke", "black")
             .text("GPU Price");
+
+        container_g.append("g")
+            .attr("class", "legendOrdinal")
+            .attr("transform", "translate(600,300)")
+
+        var ordinal = d3.scaleOrdinal(d3.schemeCategory10).domain(models)
+            .range(["#2077B4", "#FF7F0F", "#2CA02C", "#D62728"]);
+
+        var legendOrdinal = d3.legendColor()
+            //d3 symbol creates a path-string, for example
+            //"M0,-8.059274488676564L9.306048591020996,
+            //8.059274488676564 -9.306048591020996,8.059274488676564Z"
+            .shape("path", d3.symbol().type(d3.symbolCircle).size(150)())
+            .shapePadding(10)
+            .scale(ordinal);
+
+        container_g.select(".legendOrdinal")
+            .call(legendOrdinal)
     });
 }
 main();

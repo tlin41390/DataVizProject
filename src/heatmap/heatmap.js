@@ -48,8 +48,8 @@ function main() {
         const mousemove = function (event, d) {
             Tooltip
                 .html(d.mode + "<br>" + d.bought + " Units Sold")
-                .style("left", event.x + 10 + "px")
-                .style("top", event.y + (1000) + "px")
+                .style("left", event.pageX + 30 + "px")
+                .style("top", event.pageY  + "px")
         }
         var mouseleave = function () {
             Tooltip
@@ -81,7 +81,7 @@ function main() {
             .select(".domain").remove()
 
         const myColor = d3.scaleSequential()
-            .interpolator(d3.interpolateOranges)
+            .interpolator(d3.interpolatePurples)
             .domain([10, d3.max(data, (d) => { return d.bought })])
 
         container_g.selectAll()

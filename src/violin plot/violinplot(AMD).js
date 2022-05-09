@@ -1,25 +1,27 @@
 function main() {
 
-    var margin = { top: 10, right: 30, bottom: 30, left: 40 },
-        width = 460 - margin.left - margin.right,
-        height = 400 - margin.top - margin.bottom;
+    var margin = 200;
+    var canvasWidth = 700;
+    var canvasHeight = 700;
 
 
     var svg = d3.select("#AMD-Violinplot")
         .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
+        .attr("width", canvasWidth)
+        .attr("height", canvasHeight)
 
+
+    const width = svg.attr("width") - margin;
+    const height = svg.attr("height") - margin;
+
+    const container_g = svg.append("g").attr("transform", "translate(100,100)")
 
     d3.csv("CSV/stock_and_time-AMD.csv").then(data => {
 
         var y = d3.scaleLinear()
             .domain([0, 60])
             .range([height, 0])
-        svg.append("g").call(d3.axisLeft(y).ticks(10))
+        container_g.append("g").call(d3.axisLeft(y).ticks(10))
 
         var x = d3.scaleBand()
             .range([0, width])
@@ -27,7 +29,7 @@ function main() {
                 return d['chipset'];
             }))
             .padding(0.05)
-        svg.append("g")
+        container_g.append("g")
             .attr("transform", "translate(0," + height + ")")
             .call(d3.axisBottom(x))
 
@@ -57,7 +59,7 @@ function main() {
             .range([0, x.bandwidth()])
             .domain([-maxNum, maxNum])
 
-        svg
+        container_g
             .selectAll("myViolin")
             .data(bundledData)
             .enter()

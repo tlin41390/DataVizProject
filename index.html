@@ -11,6 +11,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"
     integrity="sha384-l+HksIGR+lyuyBo1+1zCBSRt6v4yklWu7RbG0Cv+jDLDD9WFcEIwZLHioVB4Wkau" crossorigin="anonymous"
     referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
 </head>
 
 <body>
@@ -24,7 +25,7 @@
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="introduction">
     <div class="container">
       <h1 class="title">About</h1>
       <p>For a while now Graphics Processing Units also known as (GPUs) have been the goal for PC builders to acqure.
@@ -41,53 +42,75 @@
         as well as the general times until GPUs go out of stock. </p><br>
   </section>
 
-  <section class="section">
-    <h1 class="title">Proportional Circles of Aggregate GPU Sold On EBay</h1>
-    <div id="bubble_chart"></div>
-    <h1 class="title">Heat Map Of GPUs Sold Overtime</h1>
-    <div id="heat_map"></div>
+  <section class="section" id="proportional circles">
+    <div class="container">
+      <h1 class="title">Proportional Circles of Aggregate GPU Sold On EBay</h1>
+
+
+      <p>This is a simple proportional circle visualization that represents the total sold for different GPU models with
+        half a year. The bigger the circle the more the model is sold. Hover over the circles to display the GPU model
+        and the quanitity sold. The green circles represent the Nvidia models and the orange circles represents the AMD
+        models. To shrink the circles to the original size, click on the circle.</p>
+    </div>
+    <div class="columns is-centered" id="bubble_chart"></div>
     <script src="src/bubblechart/bubblechart.js"></script>
+  </section>
+
+  <section class="section" id="heatmap">
+    <div class="container">
+      <h1 class="title">Heat Map Of GPUs Sold Overtime In Months</h1>
+    </div>
+
+    <div class="columns is-centered" id="heat_map"></div>
     <script src="src/heatmap/heatmap.js"></script>
   </section>
 
-  </section>
-  <section class="section">
-    <h1 class="title">Line Chart of GPU market prices over time compared to MSRP</h1>
+  <section class="section" id="interactive linechart">
     <div class="container">
+      <h1 class="title">Line Chart of GPU market prices over time compared to MSRP</h1>
       <p>This Line Chart here displays the price trend of various GPUS from September 2021 to March 2022. The dropdown
         menu on top will display the GPUs from both AMD, and Nvidia for the user to play with. One thing I found
         interestgin for the trend of GPU data is that they all seem to share the similiar trend of values peeking up
-        slightly torwards the end of the year, and then going down a bit. The black line below the colored line chart represents the MSRP.
+        slightly torwards the end of the year, and then going down a bit. The black line below the colored line chart
+        represents the MSRP.
         Needless to say the Ebay prcies are significantly more expensive and fluctuates alot.
       </p>
-    </div><br>
-    <div class="select">
-      <select></select>
+      <br>
     </div>
-    <div id="linechart"></div>
-    <script src="src/line chart/linechart(v2).js"></script>
+    <br>
+    <div class="columns is-centered">
+      <div class="select">
+        <select></select>
+      </div>
+
+      <div class="columns is-centered" id="linechart"></div>
+      <script src="src/line chart/linechart(v2).js"></script>
+    </div>
+
 
   </section>
 
   </section>
   <section class="section">
-    <h1 class="title">Histograms of Distributions of GPU sellout times within the hour</h1>
-    <div class="flex">
-      <div id="histogram"></div>
-      <script src="src/histogram/histogram.js"></script>
-      <div id="histogramAMD"></div>
-      <script src="src/histogram/histogram(AMD).js"></script>
-    </div>
+    <div class="container">
+      <h1 class="title">Histograms of Distributions of GPU sellout times within the hour</h1>
+      <div class="flex">
+        <div id="histogram"></div>
+        <script src="src/histogram/histogram.js"></script>
+        <div id="histogramAMD"></div>
+        <script src="src/histogram/histogram(AMD).js"></script>
+      </div>
   </section>
 
   </section>
   <section class="section">
-    <h1 class="title">Violin Plot of Nvidia and AMD sell out times</h1>
-    <div class="flex">
-      <div id="Nvidia-Violinplot"></div>
-      <script src="src/violin plot/violinplot.js"></script>
-      <div id="AMD-Violinplot"></div>
-      <script src="src/violin plot/violinplot(AMD).js"></script>
+    <div class="container">
+      <h1 class="title">Violin Plot of Nvidia and AMD sell out times</h1>
+      <div class="flex">
+        <div id="Nvidia-Violinplot"></div>
+        <script src="src/violin plot/violinplot.js"></script>
+        <div id="AMD-Violinplot"></div>
+        <script src="src/violin plot/violinplot(AMD).js"></script>
   </section>
 
 
