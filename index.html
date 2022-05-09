@@ -44,13 +44,14 @@
 
   <section class="section" id="proportional circles">
     <div class="container">
-      <h1 class="title">Proportional Circles of Aggregate GPU Sold On EBay</h1>
+      <h1 class="title">Proportional Circles of Aggregate GPUs Sold Within Seven On Ebay</h1>
 
 
       <p>This is a simple proportional circle visualization that represents the total sold for different GPU models with
         half a year. The bigger the circle the more the model is sold. Hover over the circles to display the GPU model
         and the quanitity sold. The green circles represent the Nvidia models and the orange circles represents the AMD
-        models. To shrink the circles to the original size, click on the circle.</p>
+        models. This data was collected using Tom's Hardware's monthly tracker. Generally, we can see a larger
+        representation of Nvidia GPUS as they dominate over AMD in terms of units sold for the most part.</p>
     </div>
     <div class="columns is-centered" id="bubble_chart"></div>
     <script src="src/bubblechart/bubblechart.js"></script>
@@ -58,7 +59,12 @@
 
   <section class="section" id="heatmap">
     <div class="container">
-      <h1 class="title">Heat Map Of GPUs Sold Overtime In Months</h1>
+      <h1 class="title">Heat Map Of GPUs Sold In Months On Ebay</h1>
+      <p>
+        This is a heatmap that represents the quanitity of units sold over the course of 6 months, from September 2021
+        all the way to February 2022. You can hover over the rectangles in order to get the specific values for each of
+        the months for dates.
+      </p>
     </div>
 
     <div class="columns is-centered" id="heat_map"></div>
@@ -79,7 +85,7 @@
     </div>
     <br>
     <div class="columns is-centered">
-      <div class="select">
+      <div class="select" id="linechart selector">
         <select></select>
       </div>
 
@@ -94,33 +100,51 @@
   <section class="section">
     <div class="container">
       <h1 class="title">Histograms of Distributions of GPU sellout times within the hour</h1>
+      <p>These here are small multiples of different histograms that measures the time it takes for GPUs to sell out. I
+        scraped the data from an active tracker and then represent the GPus with the most notifications. The bins
+        represent the minutes in increments of 5, all the way up to one hour. The y axis represents the frequency of
+        distribution between sell out times. I also incorporated hovering where users can hover over a rectangle to see
+        the frequency as well as the range of values that are in that rectangle
+      </p>
+    </div>
+    <div class="columns is-centered">
       <div class="flex">
         <div id="histogram"></div>
         <script src="src/histogram/histogram.js"></script>
         <div id="histogramAMD"></div>
         <script src="src/histogram/histogram(AMD).js"></script>
       </div>
+    </div>
+
   </section>
 
   </section>
   <section class="section">
     <div class="container">
       <h1 class="title">Violin Plot of Nvidia and AMD sell out times</h1>
+      <p>I created violin plots as a means to represent the distribution of GPUs that sell out in a different manner.
+        This provides a overview of where the main distribution lies. The advantage is that I can put more visualizations of the GPUs on the chart.</p>
+    </div>
+    </div>
+    <div class="columns is-centered">
       <div class="flex">
         <div id="Nvidia-Violinplot"></div>
         <script src="src/violin plot/violinplot.js"></script>
         <div id="AMD-Violinplot"></div>
         <script src="src/violin plot/violinplot(AMD).js"></script>
+      </div>
   </section>
 
 
   </section>
   <section class="section">
     <h1 class="title">Scatter Plot of Etherium Prices In Relation to GPU Prices</h1>
-    <div id="scatterplot"></div>
-    <script src="src/scatterplot/scatterplot.js"></script>
-    <div id="scatterplot-AMD"></div>
-    <script src="src/scatterplot/scatterplot(AMD).js"></script>
+    <div class="columns is-centered">
+      <div class="select" id="etherium_selector">
+        <select></select>
+      </div>
+      <div id="scatterplot"></div>
+      <script src="src/scatterplot/scatterplot.js"></script>
   </section>
 </body>
 

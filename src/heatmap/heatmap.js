@@ -1,5 +1,5 @@
 function main() {
-    const canvasWidth = 700;
+    const canvasWidth = 1200;
     const canvasHeight = 700;
     const margin = 200;
 
@@ -7,7 +7,7 @@ function main() {
         .attr("width", canvasWidth)
         .attr("height", canvasHeight)
 
-    const width = svg.attr("width") - margin;
+    const width = svg.attr("width") - margin - 500;
     const height = svg.attr("height") - margin;
 
     //add the text to the canvas for the title
@@ -19,8 +19,6 @@ function main() {
     d3.csv("CSV/condensed_ebay_prices.csv", (d) => { return { time: d["Month"], mode: d["GPUs"], bought: +d["Sold"] } }).then(data => {
         const myGroups = Array.from(new Set(data.map(d => d.mode)))
         const myRows = Array.from(new Set(data.map(d => d.time)))
-        console.log(myGroups);
-        console.log(myRows);
 
         // create a tooltip
         const Tooltip = d3.select("#heat_map")
@@ -49,7 +47,7 @@ function main() {
             Tooltip
                 .html(d.mode + "<br>" + d.bought + " Units Sold")
                 .style("left", event.pageX + 30 + "px")
-                .style("top", event.pageY  + "px")
+                .style("top", event.pageY + "px")
         }
         var mouseleave = function () {
             Tooltip
@@ -81,8 +79,8 @@ function main() {
             .select(".domain").remove()
 
         const myColor = d3.scaleSequential()
-            .interpolator(d3.interpolatePurples)
-            .domain([10, d3.max(data, (d) => { return d.bought })])
+            .interpolator(d3.interpolateBlues)
+            .domain([100, d3.max(data, (d) => { return d.bought })])
 
         container_g.selectAll()
             .data(data, (d) => { return d.time + ":" + d.mode })
@@ -97,6 +95,26 @@ function main() {
             .on("mouseover", mouseover)
             .on("mousemove", mousemove)
             .on("mouseout", mouseleave)
+
+        //translate the color scale
+        container_g.append("g")
+            .attr("class", "legendOrdinal")
+            .attr("transform", "translate(550,300)")
+            .attr("font-family", "sans-serif")
+
+        //set the color and size legend for the bubble chart
+        const legendOrdinal = d3.legendColor()
+            .labelFormat(d3.format(".0f"))
+            .title("Units Sold")
+            .titleWidth(100)
+            .shapeWidth(40)
+            .shapeHeight(40)
+            .shapePadding(-2)
+            // .attr("font-size","15px")
+            .scale(myColor);
+
+        container_g.select(".legendOrdinal")
+            .call(legendOrdinal);
 
     })
 

@@ -138,14 +138,13 @@ function main() {
         const Tooltip = d3.select("#histogram")
             .append("div")
             .style("opacity", 0)
-            .attr("class", "tooltip")
+            .attr("class", "column")
             .style("position", "absolute")
             .style("background-color", "white")
             .style("border", "solid")
             .style("border-width", "2px")
             .style("border-radius", "5px")
             .style("font-family", "sans-serif")
-            .style("transform", "translate(0px,0px)")
             .style("width", "200px")
             .style("padding", "5px")
 
@@ -160,6 +159,8 @@ function main() {
         let mouseleave = function (d) {
             Tooltip
                 .style("opacity", 0)
+                .style("left", "0px")
+                .style("top", "0px")
             d3.select(this)
                 .style("stroke", "white")
                 .style("opacity", 0.5)
@@ -181,8 +182,8 @@ function main() {
             .on("mousemove", (event, d) => {
                 Tooltip
                     .html("Frequency " + d.length + "<br>" + "Range " + Math.min(...d) + "-" + Math.max(...d))
-                    .style("left", event.x + 30 + "px")
-                    .style("top", event.y + (3000) + "px")
+                    .style("left", event.pageX + 30 + "px")
+                    .style("top", event.pageY + "px")
             })
             .on("mouseleave", mouseleave)
 
@@ -203,13 +204,11 @@ function main() {
             .on("mousemove", (event, d) => {
                 Tooltip
                     .html("Frequency " + d.length + "<br>" + "Range " + Math.min(...d) + "-" + Math.max(...d))
-                    .style("left", event.x + 30 + "px")
-                    .style("top", event.y + (3000) + "px")
+                    .style("left", event.pageX + 30 + "px")
+                    .style("top", event.pageY + "px")
             })
             .on("mouseleave", mouseleave)
 
-        console.log(distributions_thirtyseventy_ti);
-        console.log(distributions_thirtysixty);
 
         container_g.selectAll(".bar2")
             .data(compute_thirtyninety)
@@ -227,8 +226,8 @@ function main() {
             .on("mousemove", (event, d) => {
                 Tooltip
                     .html("Frequency " + d.length + "<br>" + "Range " + Math.min(...d) + "-" + Math.max(...d))
-                    .style("left", event.x + 30 + "px")
-                    .style("top", event.y + 3000 + "px")
+                    .style("left", event.pageX + 30 + "px")
+                    .style("top", event.pageY + "px")
             })
             .on("mouseleave", mouseleave)
 
@@ -248,8 +247,8 @@ function main() {
             .on("mousemove", (event, d) => {
                 Tooltip
                     .html("Frequency " + d.length + "<br>" + "Range " + Math.min(...d) + "-" + Math.max(...d))
-                    .style("left", event.x + 30 + "px")
-                    .style("top", event.y + 3000 + "px")
+                    .style("left", event.pageX + 30 + "px")
+                    .style("top", event.pageY + "px")
             })
             .on("mouseleave", mouseleave)
     })

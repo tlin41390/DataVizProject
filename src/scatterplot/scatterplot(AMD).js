@@ -81,7 +81,6 @@ function main() {
         var ordinal = d3.scaleOrdinal(d3.schemeCategory10).domain(models)
             .range(["#2077B4", "#FF7F0F", "#2CA02C", "#D62728"]);
 
-        console.log([...models]);
 
         var legendOrdinal = d3.legendColor()
             //d3 symbol creates a path-string, for example

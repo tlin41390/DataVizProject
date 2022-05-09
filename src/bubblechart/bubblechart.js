@@ -1,11 +1,14 @@
 function main() {
-    const canvasWidth = 800;
-    const canvasHeight = 800;
-
+    const canvasWidth = 700;
+    const canvasHeight = 700;
     const svg = d3.select("#bubble_chart")
         .append("svg")
         .attr("width", canvasWidth)
         .attr("height", canvasHeight)
+
+ 
+
+    const container_g = svg.append("g").attr("transform", "translate(100,100)")
 
 
     d3.csv("CSV/gpu_counts.csv").then((data) => {
@@ -18,7 +21,7 @@ function main() {
         const Tooltip = d3.select("#bubble_chart")
             .append("div")
             .style("opacity", 0)
-            .attr("class","column")
+            .attr("class", "column")
             .style("position", "absolute")
             .style("background-color", "white")
             .style("border", "solid")
@@ -39,7 +42,7 @@ function main() {
         const mousemove = function (event, d) {
             Tooltip
                 .html(d.GPUs + "<br>" + d.Sold + " Units Sold")
-                .style("left", event.pageX+ 30 + "px")
+                .style("left", event.pageX + 30 + "px")
                 .style("top", event.pageY + "px")
         }
         var mouseleave = function () {
@@ -48,16 +51,16 @@ function main() {
             d3.select(this).style("stroke", "black")
         }
 
-        var node = svg.append("g")
+        var node = container_g.append("g")
             .selectAll("circle")
             .data(data)
             .join("circle")
             .attr("r", d => size(+d.Sold))
-            .attr("cx", canvasWidth / 2+30)
+            .attr("cx", canvasWidth / 2 + 30)
             .attr("cy", canvasHeight / 2)
             .style("stroke", "black")
             .style("stroke-width", 2)
-            .style("data-tooltip",(d)=>{+d.Sold})
+            .style("data-tooltip", (d) => { +d.Sold })
             .style("fill", (d) => {
                 if (d.GPUs.indexOf("GeForce") != -1) {
                     return "green"

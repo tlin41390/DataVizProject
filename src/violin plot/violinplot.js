@@ -54,9 +54,6 @@ function main() {
             if (longuest > maxNum) { maxNum = longuest }
             bundledData.push({ key: keys, value: values })
         })
-        console.log(bundledData)
-
-        console.log(sumstatTwo.keys())
 
         var xNum = d3.scaleLinear()
             .range([0, x.bandwidth()])

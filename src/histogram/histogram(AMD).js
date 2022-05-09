@@ -48,7 +48,7 @@ function main() {
                 distributions_rx5700.push(d["time"])
             } else if (d.chipset == "rx6700xt") {
                 distributions_rx6700.push(d["time"])
-            } else if (d.chipset == "600xt") {
+            } else if (d.chipset == "rx6600xt") {
                 distributions_rx6600xt.push(d["time"])
             } else if (d.chipset == "rx6800xt") {
                 distributions_rx6800xt.push(d["time"])
@@ -139,7 +139,7 @@ function main() {
         const Tooltip = d3.select("#histogramAMD")
             .append("div")
             .style("opacity", 0)
-            .attr("class", "tooltip")
+            .attr("class", "column")
             .style("position", "absolute")
             .style("background-color", "white")
             .style("border", "solid")
@@ -161,6 +161,8 @@ function main() {
         let mouseleave = function (d) {
             Tooltip
                 .style("opacity", 0)
+                .style("left", "0px")
+                .style("top", "0px")
             d3.select(this)
                 .style("stroke", "white")
                 .style("opacity", 0.5)
@@ -181,8 +183,8 @@ function main() {
             .on("mousemove", (event, d) => {
                 Tooltip
                     .html("Frequency " + d.length + "<br>" + "Range " + Math.min(...d) + "-" + Math.max(...d))
-                    .style("left", event.x + 30 + "px")
-                    .style("top", event.y + (3000) + "px")
+                    .style("left", event.pageX + 30 + "px")
+                    .style("top", event.pageY + "px")
             })
             .on("mouseleave", mouseleave)
 
@@ -203,13 +205,10 @@ function main() {
             .on("mousemove", (event, d) => {
                 Tooltip
                     .html("Frequency " + d.length + "<br>" + "Range " + Math.min(...d) + "-" + Math.max(...d))
-                    .style("left", event.x + 30 + "px")
-                    .style("top", event.y + (3000) + "px")
+                    .style("left", event.pageX + 30 + "px")
+                    .style("top", event.pageY + "px")
             })
             .on("mouseleave", mouseleave)
-
-        console.log(distributions_rx5700);
-        console.log(distributions_rx6800xt);
 
         container_g.selectAll(".bar2")
             .data(compute_rx6600xt)
@@ -227,8 +226,8 @@ function main() {
             .on("mousemove", (event, d) => {
                 Tooltip
                     .html("Frequency " + d.length + "<br>" + "Range " + Math.min(...d) + "-" + Math.max(...d))
-                    .style("left", event.x + 30 + "px")
-                    .style("top", event.y + (3000) + "px")
+                    .style("left", event.pageX + 30 + "px")
+                    .style("top", event.pageY + "px")
             })
             .on("mouseleave", mouseleave)
 
@@ -248,8 +247,8 @@ function main() {
             .on("mousemove", (event, d) => {
                 Tooltip
                     .html("Frequency " + d.length).html("Frequency " + d.length + "<br>" + "Range " + Math.min(...d) + "-" + Math.max(...d))
-                    .style("left", event.x + 30 + "px")
-                    .style("top", event.y + (3000) + "px")
+                    .style("left", event.pageX + 30 + "px")
+                    .style("top", event.pageY + "px")
             })
             .on("mouseleave", mouseleave)
     })
